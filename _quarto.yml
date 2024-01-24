@@ -1,0 +1,23 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "ARHU299"
+  navbar:
+    left:
+      - href: src/syllabus.md
+        text: Syllabus
+      - href: src/lecturenotes/index.md
+        text: Lecture Notes
+      - href: src/resources.md
+        text: Resources
+
+format:
+  html:
+    theme: darkly
+    css: styles.css
+    toc: true
+
+
+

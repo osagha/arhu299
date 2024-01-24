@@ -1,0 +1,7 @@
+---
+title: "ARHU299"
+---
+
+This is the homepage for ARHU299: Machine Learning in Language and Art at the University of Maryland, College Park.
+
+Please see the [syllabus](src/syllabus.md) for more info.
