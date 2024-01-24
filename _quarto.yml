@@ -15,8 +15,12 @@ website:
 
 format:
   html:
-    theme: darkly
+    theme: 
+      dark: darkly
+      light: flatly
     css: styles.css
+    fontsize: 1.2em
+    linestretch: 1.7
     toc: true
 
 

@@ -18,7 +18,7 @@
     "href": "src/resources.html",
     "title": "Resources",
     "section": "",
-    "text": "I’ll be adding resources here throughout the semester.\n\n\n\n\nA tried-and-true standard textbook for computational linguistics and NLP. The book’s website includes slides too, which are great for a quick reference. Accompanying Youtube lectures can be found here.\n\n\n\nA high quality, detailed, and somewhat technical introduction to NLP.\n\n\n\n\n\n\nA brilliant visual introduction to deep learning. See also his interactive courses on neural networks, linear algebra, and calculus.\n\n\n\nA Stanford NLP course by Dan Jurafsky, based on the textbook Speech and Language Processing linked above. More accessible than the other courses listed below.\n\n\n\nA Stanford course by Christopher Manning, free on Youtube. This is aimed at Computer Science majors, so it may be more accessible after you have already learned the basics in this course.\n\n\n\nA UC Berkeley course on computer vision, free on Youtube. Quite technical, and best approached after this class."
+    "text": "I’ll be adding resources here throughout the semester.\n\n\n\n\nA tried-and-true standard textbook for computational linguistics and NLP. The book’s website includes slides too, which are great for a quick reference. Accompanying Youtube lectures can be found here.\n\n\n\nA high quality, detailed, and somewhat technical introduction to NLP.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA brilliant visual introduction to deep learning by 3blue1brown (Grant Sanderson). See also his interactive courses on neural networks, linear algebra, and calculus.\n\n\n\n\n\n\nA Stanford NLP course by Dan Jurafsky, based on the textbook Speech and Language Processing linked above. More accessible than the other courses listed below.\n\n\n\nA Stanford course by Christopher Manning, free on Youtube. This is aimed at Computer Science majors, so it may be more accessible after you have already learned the basics in this course.\n\n\n\nA UC Berkeley course on computer vision, free on Youtube. Quite technical, and best approached after this class."
   },
   {
     "objectID": "src/resources.html#textbooks",
@@ -32,7 +32,14 @@
     "href": "src/resources.html#videos",
     "title": "Resources",
     "section": "",
-    "text": "A brilliant visual introduction to deep learning. See also his interactive courses on neural networks, linear algebra, and calculus.\n\n\n\nA Stanford NLP course by Dan Jurafsky, based on the textbook Speech and Language Processing linked above. More accessible than the other courses listed below.\n\n\n\nA Stanford course by Christopher Manning, free on Youtube. This is aimed at Computer Science majors, so it may be more accessible after you have already learned the basics in this course.\n\n\n\nA UC Berkeley course on computer vision, free on Youtube. Quite technical, and best approached after this class."
+    "text": "A brilliant visual introduction to deep learning by 3blue1brown (Grant Sanderson). See also his interactive courses on neural networks, linear algebra, and calculus."
+  },
+  {
+    "objectID": "src/resources.html#full-courses",
+    "href": "src/resources.html#full-courses",
+    "title": "Resources",
+    "section": "",
+    "text": "A Stanford NLP course by Dan Jurafsky, based on the textbook Speech and Language Processing linked above. More accessible than the other courses listed below.\n\n\n\nA Stanford course by Christopher Manning, free on Youtube. This is aimed at Computer Science majors, so it may be more accessible after you have already learned the basics in this course.\n\n\n\nA UC Berkeley course on computer vision, free on Youtube. Quite technical, and best approached after this class."
   },
   {
     "objectID": "src/syllabus.html",
