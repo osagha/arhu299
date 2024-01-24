@@ -6,11 +6,11 @@ website:
   title: "ARHU299"
   navbar:
     left:
-      - href: src/syllabus.md
+      - href: pages/syllabus.md
         text: Syllabus
-      - href: src/lecturenotes/index.md
+      - href: pages/lecturenotes/index.md
         text: Lecture Notes
-      - href: src/resources.md
+      - href: pages/resources.md
         text: Resources
 
 format:
