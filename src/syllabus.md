@@ -3,9 +3,9 @@ Syllabus for ARHU299: Machine Learning in Language and Art at the University of 
 
 Last updated January 24, 2024.
 
-Instructor: Omar Agha
+Instructor: Omar Agha (oagha@umd.edu)
 
-TA: Utku Turk
+TA: Utku Türk
 
 ## Course Summary
 In this course, you will learn how machine learning models read and write text, classify images, and more. This requires understanding some basic elements of linear algebra (vectors and matrices), calculus (the chain rule for derivatives), Python programming, and basic statistics. If you have not seen any of this before, you will learn the relevant tools along the way, in the context of solving applied problems, and with the aid of software that performs complex calculations for you.
