@@ -132,3 +132,7 @@ Taking care of yourself is the foundation for all success in life. Make sure you
 
 ### Mental Health
 If mental health challenges are keeping you from doing your best, the university provides [Counseling](https://counseling.umd.edu/) and [Behavioral Health Services](https://health.umd.edu/behavioral-health). The earlier you reach out, the more you can benefit from these resources.
+
+## Disability Accommodations
+
+Students with disabilities are very welcome in this class. If you require accommodations, please contact me as soon as possible. For more information about disability accommodations at UMD, please see the [ADS webpage](https://ads.umd.edu/).
