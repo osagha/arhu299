@@ -1,0 +1,6 @@
+# Day 2
+
+## Content
+
+Today we'll discuss feature representations for text. We'll make embeddings for text documents using a bag-of-words representation. Then we'll write down a pen-and-paper neural network for sentiment analysis, then build it in a spreadsheet.
+

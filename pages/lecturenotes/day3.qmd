@@ -1,0 +1,4 @@
+# Day 3
+
+## Content
+Today we'll talk about learning word embeddings from data.
