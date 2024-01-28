@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "pages/lecturenotes/day2.html",
+    "href": "pages/lecturenotes/day2.html",
+    "title": "Day 2",
+    "section": "",
+    "text": "Today we’ll discuss feature representations for text. We’ll make embeddings for text documents using a bag-of-words representation. Then we’ll write down a pen-and-paper neural network for sentiment analysis, then build it in a spreadsheet."
+  },
+  {
+    "objectID": "pages/lecturenotes/day2.html#content",
+    "href": "pages/lecturenotes/day2.html#content",
+    "title": "Day 2",
+    "section": "",
+    "text": "Today we’ll discuss feature representations for text. We’ll make embeddings for text documents using a bag-of-words representation. Then we’ll write down a pen-and-paper neural network for sentiment analysis, then build it in a spreadsheet."
+  },
+  {
     "objectID": "pages/lecturenotes/index.html",
     "href": "pages/lecturenotes/index.html",
     "title": "Lecture Notes",
@@ -159,5 +173,19 @@
     "title": "Day 1",
     "section": "",
     "text": "Next class, we will see a toy example of text classification with low-dimensional feature representations of strings. From there, we will look at how higher-dimensional feature representations help models understand more about the meaning of the text."
+  },
+  {
+    "objectID": "pages/lecturenotes/day3.html",
+    "href": "pages/lecturenotes/day3.html",
+    "title": "Day 3",
+    "section": "",
+    "text": "Today we’ll talk about learning word embeddings from data."
+  },
+  {
+    "objectID": "pages/lecturenotes/day3.html#content",
+    "href": "pages/lecturenotes/day3.html#content",
+    "title": "Day 3",
+    "section": "",
+    "text": "Today we’ll talk about learning word embeddings from data."
   }
 ]
