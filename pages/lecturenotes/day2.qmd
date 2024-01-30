@@ -2,5 +2,61 @@
 
 ## Content
 
-Today we'll discuss feature representations for text. We'll make embeddings for text documents using a bag-of-words representation. Then we'll write down a pen-and-paper neural network for sentiment analysis, then build it in a spreadsheet.
+Today we built a one-layer sigmoid classifier to classify movie reviews into two classes: `positive` and `negative`.
+
+## Model setup
+
+The goal was to generate a "score" $z = xw + b$ for each movie review, and tweak the formula behind the scores so that positive reviews have higher scores and negative reviews have lower scores.
+
+Those scores can be any number, but in the end we want the model to guess whether the review is positive or negative. To do this, we use the sigmoid function, which squishes the real number line into the interval $(0,1)$. 
+
+$$ \sigma(z) = \frac{1}{1 + \exp(-z)}$$
+
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(-1, 1, 101)
+plt.plot(x, 1/(1+np.exp(-x))
+```
+
+The model's output is $\hat y = \sigma(z)$, a number between 0 and 1, which we can interpret as "the probability that review $x$ was a positive review".
+
+## Hand-crafted features
+
+To make text digestible by machine models, we have to create *feature representations*. We discussed the difference between hand-crafted features, which are created by the modeller, and learned features, which are learned from data.
+
+We came up with some fake movie reviews and discussed three hand-crafted features: word count, count of positive words, and count of negative words.
+
+Each review is encoded as a row of three numbers, representing the word count, the number of positive words, and the number of negative words, respectively
+
+```{mermaid}
+flowchart LR
+    W["I was happy with this movie"] --> A["[6, 1, 0]"]
+    X["That was terrible"] --> B["[3, 0, 1]"]
+    Y["Great movie"] --> C["[2, 1, 0]"]
+    Z["The terrible acting actually made it funny"] --> D["[7, 1, 1]"]
+
+```
+
+
+## Matrix multiplication
+
+To calculate the scores for multiple reviews at once, we use matrix multiplication. Each feature representation is a row of 3 numbers, so if we have 4 reviews in the dataset, then we end up with a $4\times 3$ matrix representing the dataset.
+
+$$x = \left[\begin{array}6 & 1 & 0 \\ 3 & 0 & 1 \\ 2 & 1 & 0 \\ 7 & 1 & 1 \end{array}\right]$$
+
+
+Our weights will be a $3 \times 1$ matrix, and our bias will be a single number. I didn't show this in class, but we have to repeat the bias number 4 times so that it has the same shape $4 \times 1$ as $xw$.
+
+Here's an example weight matrix.
+
+$$w = \left[\begin{array} -1 \\ 2 \\ -2 \end{array}\right]$$
+
+(In class we made the weight for the word count positive, but if we think that negative reviews have higher word counts, then we should actually make it negative.)
+
+If our bias is $-5$, then we end up with the following $z$ scores.
+
+$$z = wx + b = \left[\begin{array}6 & 1 & 0 \\ 3 & 0 & 1 \\ 2 & 1 & 0 \\ 7 & 1 & 1 \end{array}\right] \left[\begin{array} -1 \\ 2 \\ -2 \end{array}\right] + $\end{array}\right] \left[\begin{array} -5 \\ -5 \\ -5 \\ -5 \end{array}\right]$$
 
