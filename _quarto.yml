@@ -10,6 +10,8 @@ website:
         text: Syllabus
       - href: pages/lecturenotes/index.md
         text: Lecture Notes
+      - href: pages/homework/index.md
+        text: Homework
       - href: pages/resources.md
         text: Resources
 

@@ -4,14 +4,42 @@
     "href": "pages/lecturenotes/day2.html",
     "title": "Day 2",
     "section": "",
-    "text": "Today we’ll discuss feature representations for text. We’ll make embeddings for text documents using a bag-of-words representation. Then we’ll write down a pen-and-paper neural network for sentiment analysis, then build it in a spreadsheet."
+    "text": "Today we built a one-layer sigmoid classifier to classify movie reviews into two classes: positive and negative."
   },
   {
     "objectID": "pages/lecturenotes/day2.html#content",
     "href": "pages/lecturenotes/day2.html#content",
     "title": "Day 2",
     "section": "",
-    "text": "Today we’ll discuss feature representations for text. We’ll make embeddings for text documents using a bag-of-words representation. Then we’ll write down a pen-and-paper neural network for sentiment analysis, then build it in a spreadsheet."
+    "text": "Today we built a one-layer sigmoid classifier to classify movie reviews into two classes: positive and negative."
+  },
+  {
+    "objectID": "pages/lecturenotes/day2.html#model-setup",
+    "href": "pages/lecturenotes/day2.html#model-setup",
+    "title": "Day 2",
+    "section": "Model setup",
+    "text": "Model setup\nThe goal was to generate a score \\[z = xw + b\\] for each movie review, and tweak the formula behind the scores so that positive reviews have higher scores and negative reviews have lower scores.\nThe score \\(z\\) can be any real number. But what we actually want is for the model to guess whether the review is positive or negative. To do this, we use the sigmoid function, which squishes the real number line into the interval \\((0,1)\\).\n\\[ \\sigma(z) = \\frac{1}{1 + \\exp(-z)}\\]\nThe model’s output is \\(\\hat y = \\sigma(z)\\), a number between 0 and 1, which we can interpret as “the probability that review \\(x\\) was a positive review”.\nNOTE: The symbol \\(\\sigma\\) is the greek letter sigma. The sigmoid function is also known as the logistic function."
+  },
+  {
+    "objectID": "pages/lecturenotes/day2.html#hand-crafted-features",
+    "href": "pages/lecturenotes/day2.html#hand-crafted-features",
+    "title": "Day 2",
+    "section": "Hand-crafted features",
+    "text": "Hand-crafted features\nTo make text digestible by machine models, we have to encode it using feature representations. In class, we discussed the difference between hand-crafted features, which are created by the modeller, and learned features, which are learned from data.\nWe came up with some fake movie reviews and discussed three hand-crafted features: total word count, count of positive words, and count of negative words.\nEach review is encoded as a row of three numbers, representing the word count, the number of positive words, and the number of negative words, respectively. Here are four examples.\n\n\n\n\nflowchart LR\n    W[\"+, I was happy with this great movie\"] --&gt; A[\"[6, 2, 0]\"]\n    X[\"- , That was terrible\"] --&gt; B[\"[3, 0, 1]\"]\n    Y[\"+, Great movie\"] --&gt; C[\"[2, 1, 0]\"]\n    Z[\"-, The terrible acting actually made it fun to watch\"] --&gt; D[\"[7, 1, 1]\"]"
+  },
+  {
+    "objectID": "pages/lecturenotes/day2.html#matrix-multiplication",
+    "href": "pages/lecturenotes/day2.html#matrix-multiplication",
+    "title": "Day 2",
+    "section": "Matrix multiplication",
+    "text": "Matrix multiplication\nTo calculate the scores for multiple reviews at once, we use matrix multiplication. Each feature representation is a row of 3 numbers, so if we have 4 reviews in the dataset, then we end up with a \\(4\\times 3\\) matrix representing the dataset. \\(y\\) is a vector representing the true labels of each example, 1 for positive and 0 for negative.\n\\[y = \\left[\\begin{array}{c} 1 \\\\ 0 \\\\ 1 \\\\ 0 \\end{array}\\right] \\,\\,\\,\\,\\,\\,\\,\\,\\,\\,\\,\\,\\,\\,\\,\\,\\,\\, x = \\left[\\begin{array}{ccc} 6 & 2 & 0 \\\\ 3 & 0 & 1 \\\\ 2 & 1 & 0 \\\\ 7 & 1 & 1 \\end{array}\\right]\\]\nOur weights will be a \\(3 \\times 1\\) matrix, and our bias will be a single number. I didn’t show this in class, but we have to write the bias number 4 times in a column vector, so that it has the same shape as \\(xw\\) (\\(4 \\times 1\\)).\nHere’s an example weight matrix (in this case the weights are a \\(3 \\times 1\\) column vector).\n\\[w = \\left[\\begin{array}{ccc} -1 \\\\ 2 \\\\ -2 \\end{array}\\right]\\]\n(In class we made the weight for the word count positive, but if we think that negative reviews have higher word counts, then we should actually make it negative.)\nIf our bias is \\(+4\\), then we end up with the following \\(z\\) scores.\n\\[z = xw + b = \\left[\\begin{array}{ccc} 6 & 2 & 0 \\\\ 3 & 0 & 1 \\\\ 2 & 1 & 0 \\\\ 7 & 1 & 1 \\end{array}\\right] \\left[\\begin{array}{ccc} -1 \\\\ 2 \\\\ -2 \\end{array}\\right] + \\left[\\begin{array}{ccc} 4 \\\\ 4 \\\\ 4 \\\\ 4 \\end{array}\\right]\\]\n\\[= \\left[\\begin{array}{ccc} 6 \\cdot (-1) + 2 \\cdot 2 + 0 \\cdot (-2) \\\\ 3 \\cdot (-1) + 0 \\cdot 2 + 1 \\cdot (-2) \\\\ 2 \\cdot (-1) + 1 \\cdot 2 + 0 \\cdot (-2) \\\\ 7 \\cdot (-1) + 1 \\cdot 2 + 1 \\cdot (-2) \\end{array}\\right]  + \\left[\\begin{array}{ccc} 4 \\\\ 4 \\\\ 4 \\\\ 4 \\end{array}\\right] = \\left[\\begin{array}{ccc} -2 \\\\ -5 \\\\ 0 \\\\ -7 \\end{array}\\right]  + \\left[\\begin{array}{ccc} 4 \\\\ 4 \\\\ 4 \\\\ 4 \\end{array}\\right] = \\left[\\begin{array}{ccc} 2 \\\\ -1 \\\\ 4 \\\\ -3 \\end{array}\\right]\\]\nWith these weights and biases, we end up with positive \\(z\\) for reviews 1 and 3, and negative \\(z\\) for reviews 2 and 4. The sigmoid \\(\\sigma\\) function will turn the positive \\(z\\) scores into probabilities greater than 0.5, and negative z scores into probabilities smaller than 0.5. Sigmoid takes in a single number, so we apply it element-wise (meaning, to each element of the vector).\n\\[\\hat y = \\sigma(z) = \\sigma\\left(\\left[\\begin{array}{c} 2 \\\\ -1 \\\\ 4 \\\\ -3 \\end{array}\\right]\\right) = \\left[\\begin{array}{c} \\sigma(2) \\\\ \\sigma(-1) \\\\ \\sigma(4) \\\\ \\sigma(-3) \\end{array}\\right] = \\left[\\begin{array}{c} 0.88 \\\\ 0.27 \\\\ 0.95 \\\\ 0.05 \\end{array}\\right]\\]\nRecall that the true labels were:\n\\[y = \\left[\\begin{array}{c} 1 \\\\ 0 \\\\ 1 \\\\ 0 \\end{array}\\right]\\]\nWe can look at the differences between the true labels \\(y\\) and the predicted labels \\(\\hat y\\). The goal is to approximate the true labels as closely as possible, so the smaller these differences are, the better our model is.\n\\[y  - \\hat y = \\left[\\begin{array}{c} 1 \\\\ 0 \\\\ 1 \\\\ 0 \\end{array}\\right] - \\left[\\begin{array}{c} 0.88 \\\\ 0.27 \\\\ 0.95 \\\\ 0.05 \\end{array}\\right] \\,\\,\\,\\, = \\,\\,\\,\\, \\left[\\begin{array}{c} 0.12 \\\\ -0.27 \\\\ 0.05 \\\\ -0.05 \\end{array}\\right]\\]"
+  },
+  {
+    "objectID": "pages/lecturenotes/day2.html#summing-up",
+    "href": "pages/lecturenotes/day2.html#summing-up",
+    "title": "Day 2",
+    "section": "Summing up",
+    "text": "Summing up\nWe now know how to write down the formulas for one-layer sigmoid classifier and apply it to binary text classification. In the future, we’ll look at the softmax function for multi-class classification (where there are more than two output labels).\nWe’ll also start to look at representation learning, the art of learning features from data (rather than hand-crafting them, like we’ve done here)."
   },
   {
     "objectID": "pages/lecturenotes/index.html",
@@ -19,6 +47,13 @@
     "title": "Lecture Notes",
     "section": "",
     "text": "Lecture Notes\n\nDay 1"
+  },
+  {
+    "objectID": "pages/homework/index.html",
+    "href": "pages/homework/index.html",
+    "title": "Homework",
+    "section": "",
+    "text": "Homework\n\nHomework 1: Binary classification and matrix math"
   },
   {
     "objectID": "pages/syllabus.html",
@@ -138,6 +173,27 @@
     "title": "Resources",
     "section": "",
     "text": "A Stanford NLP course by Dan Jurafsky, based on the textbook Speech and Language Processing linked above. More accessible than the other courses listed below.\n\n\n\nA Stanford course by Christopher Manning, free on Youtube. This is aimed at Computer Science majors, so it may be more accessible after you have already learned the basics in this course.\n\n\n\nA UC Berkeley course on computer vision, free on Youtube. Quite technical, and best approached after this class."
+  },
+  {
+    "objectID": "pages/homework/homework1.html",
+    "href": "pages/homework/homework1.html",
+    "title": "Homework 1",
+    "section": "",
+    "text": "Due Thursday February 8th.\nSolve each problem by hand. You may handwrite or type your solutions.\nIf you handwrite, your writing must be clearly legible.\n\n\nHere are some matrices of various shapes and sizes. \\[I_2 = \\left[\\begin{array}{cc} 1 & 0 \\\\ 0 & 1 \\end{array}\\right] \\,\\,\\,\\,\\, I_3 = \\left[\\begin{array}{ccc} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{array}\\right] \\,\\,\\,\\,\\, P = \\left[\\begin{array}{ccc} 1 & 0 & 0 \\\\ 0 & 0 & 1 \\\\ 0 & 1 & 1 \\end{array}\\right] \\,\\,\\,\\,\\, Q = \\left[\\begin{array}{ccc} 0 & 0 & 1 \\\\ 0 & 1 & 0 \\\\ 1 & 0 & 0 \\end{array}\\right]\\]\n\\[ V = \\left[\\begin{array}{ccc} 7 & 0 & -3  \\end{array}\\right] \\,\\,\\,\\,\\,\\,\\,\\,\\,\\, W = \\left[\\begin{array}{c} 2 \\\\ -1 \\\\ 3 \\end{array}\\right] \\]\n\\[ A = \\left[\\begin{array}{ccc} -2 & 3 & 8 \\\\ 0 & 11 & -3 \\\\ -2 & 0 & 0 \\end{array}\\right] \\,\\,\\,\\,\\, \\,\\,\\,\\,\\, B = \\left[\\begin{array}{ccc} 1 & 1 & -4 \\\\ -1 & 0 & -2  \\end{array}\\right] \\,\\,\\,\\,\\, \\,\\,\\,\\,\\, C = \\left[\\begin{array}{cc} 0 & 3  \\\\ -1 & -5 \\\\ 5 & 7  \\end{array}\\right] \\]\n\nCalculate the matrix products \\(I_2B\\), \\(I_3A\\), \\(PA\\), and \\(QA\\).\nIn plain words, what do the matrices \\(I_2\\), \\(I_3\\), \\(P\\), and \\(Q\\) do to other matrices?\nCalculate the matrix products \\(VW\\) and \\(WV\\).\nWhat do you notice about \\(VW\\) and \\(WV\\)?\nThink about the products \\(AB\\), \\(BA\\), \\(AC\\), \\(CA\\), \\(BC\\),and \\(CB\\). Which of these products work?\nFor each product that works, calculate it.\n\n\n\n\nRead the lecture notes for Day 2 carefully, then do all of the following by hand.\n\nWrite down the weights and biases for that model.\nMake up five short movie reviews and count up their features (word count, positive word count, negative word count). Make sure you write down which words you consider positive and which words you consider negative!\nWrite down the \\(5 \\times 3\\) matrix \\(x\\) for your encoded data and a \\(5 \\times 1\\) column vector \\(y\\) for the true labels.\nUsing your own data matrix \\(x\\), along with the weights and biases from the Day 2 lecture notes, calculate the \\(z = xw + b\\).\nThen, calculate the model predictions \\(\\hat y = \\sigma(z)\\). (You can use a calculator for the sigmoid part.)\nCalculate the difference \\(y - \\hat y\\).\nHow did the model do on your data?\nCan you change the bias or the weights to improve the performance?"
+  },
+  {
+    "objectID": "pages/homework/homework1.html#part-1-matrix-math-warmup",
+    "href": "pages/homework/homework1.html#part-1-matrix-math-warmup",
+    "title": "Homework 1",
+    "section": "",
+    "text": "Here are some matrices of various shapes and sizes. \\[I_2 = \\left[\\begin{array}{cc} 1 & 0 \\\\ 0 & 1 \\end{array}\\right] \\,\\,\\,\\,\\, I_3 = \\left[\\begin{array}{ccc} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{array}\\right] \\,\\,\\,\\,\\, P = \\left[\\begin{array}{ccc} 1 & 0 & 0 \\\\ 0 & 0 & 1 \\\\ 0 & 1 & 1 \\end{array}\\right] \\,\\,\\,\\,\\, Q = \\left[\\begin{array}{ccc} 0 & 0 & 1 \\\\ 0 & 1 & 0 \\\\ 1 & 0 & 0 \\end{array}\\right]\\]\n\\[ V = \\left[\\begin{array}{ccc} 7 & 0 & -3  \\end{array}\\right] \\,\\,\\,\\,\\,\\,\\,\\,\\,\\, W = \\left[\\begin{array}{c} 2 \\\\ -1 \\\\ 3 \\end{array}\\right] \\]\n\\[ A = \\left[\\begin{array}{ccc} -2 & 3 & 8 \\\\ 0 & 11 & -3 \\\\ -2 & 0 & 0 \\end{array}\\right] \\,\\,\\,\\,\\, \\,\\,\\,\\,\\, B = \\left[\\begin{array}{ccc} 1 & 1 & -4 \\\\ -1 & 0 & -2  \\end{array}\\right] \\,\\,\\,\\,\\, \\,\\,\\,\\,\\, C = \\left[\\begin{array}{cc} 0 & 3  \\\\ -1 & -5 \\\\ 5 & 7  \\end{array}\\right] \\]\n\nCalculate the matrix products \\(I_2B\\), \\(I_3A\\), \\(PA\\), and \\(QA\\).\nIn plain words, what do the matrices \\(I_2\\), \\(I_3\\), \\(P\\), and \\(Q\\) do to other matrices?\nCalculate the matrix products \\(VW\\) and \\(WV\\).\nWhat do you notice about \\(VW\\) and \\(WV\\)?\nThink about the products \\(AB\\), \\(BA\\), \\(AC\\), \\(CA\\), \\(BC\\),and \\(CB\\). Which of these products work?\nFor each product that works, calculate it."
+  },
+  {
+    "objectID": "pages/homework/homework1.html#part-2-more-binary-classification",
+    "href": "pages/homework/homework1.html#part-2-more-binary-classification",
+    "title": "Homework 1",
+    "section": "",
+    "text": "Read the lecture notes for Day 2 carefully, then do all of the following by hand.\n\nWrite down the weights and biases for that model.\nMake up five short movie reviews and count up their features (word count, positive word count, negative word count). Make sure you write down which words you consider positive and which words you consider negative!\nWrite down the \\(5 \\times 3\\) matrix \\(x\\) for your encoded data and a \\(5 \\times 1\\) column vector \\(y\\) for the true labels.\nUsing your own data matrix \\(x\\), along with the weights and biases from the Day 2 lecture notes, calculate the \\(z = xw + b\\).\nThen, calculate the model predictions \\(\\hat y = \\sigma(z)\\). (You can use a calculator for the sigmoid part.)\nCalculate the difference \\(y - \\hat y\\).\nHow did the model do on your data?\nCan you change the bias or the weights to improve the performance?"
   },
   {
     "objectID": "pages/lecturenotes/day1.html",

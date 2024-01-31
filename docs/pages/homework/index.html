@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ARHU299 – day1</title>
+<title>ARHU299 – index</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,10 +61,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<meta name="mermaid-theme" content="dark">
-<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -96,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../pages/homework/index.html" rel="" target="">
+    <a class="nav-link active" href="../../pages/homework/index.html" rel="" target="" aria-current="page">
  <span class="menu-text">Homework</span></a>
   </li>  
   <li class="nav-item">
@@ -120,16 +116,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#day-1" id="toc-day-1" class="nav-link active" data-scroll-target="#day-1">Day 1</a>
+  <li><a href="#homework" id="toc-homework" class="nav-link active" data-scroll-target="#homework">Homework</a>
   <ul class="collapse">
-  <li><a href="#what-is-a-neural-network-conceptually" id="toc-what-is-a-neural-network-conceptually" class="nav-link" data-scroll-target="#what-is-a-neural-network-conceptually">What is a neural network, conceptually?</a></li>
-  <li><a href="#what-is-text" id="toc-what-is-text" class="nav-link" data-scroll-target="#what-is-text">What is text?</a></li>
-  <li><a href="#text-classification" id="toc-text-classification" class="nav-link" data-scroll-target="#text-classification">Text classification</a>
-  <ul class="collapse">
-  <li><a href="#word-embeddings" id="toc-word-embeddings" class="nav-link" data-scroll-target="#word-embeddings">Word embeddings</a></li>
-  <li><a href="#a-visualization" id="toc-a-visualization" class="nav-link" data-scroll-target="#a-visualization">A visualization</a></li>
-  </ul></li>
-  <li><a href="#for-next-time" id="toc-for-next-time" class="nav-link" data-scroll-target="#for-next-time">For next time</a></li>
+  <li><a href="#homework-1-binary-classification-and-matrix-math" id="toc-homework-1-binary-classification-and-matrix-math" class="nav-link" data-scroll-target="#homework-1-binary-classification-and-matrix-math">Homework 1: Binary classification and matrix math</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -139,114 +128,10 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="day-1" class="level1">
-<h1>Day 1</h1>
-<section id="what-is-a-neural-network-conceptually" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-a-neural-network-conceptually">What is a neural network, conceptually?</h2>
-<p>A neural network is a kind of function. It can take inputs in array format, and return outputs in a (possibly different) array format.</p>
-<p>Neural networks can take many kinds of inputs, like text, images, or sound files. In each case, the input has to be encoded as an array of numbers.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-    A(Text) --&gt; Z{Neural network}
-    B(Image) --&gt; Z
-    C(Sound file) --&gt; Z
-    Z --&gt; D("Label (Classification)")
-    Z --&gt; E("Text, Image, Sound (Generation)")
-    
-</pre>
-</div>
-</div>
-</div>
-</div>
-<p>In the case of classification, the output is a label. In the case of generation, the output could be of many types, including more text, images, or sound.</p>
-</section>
-<section id="what-is-text" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-text">What is text?</h2>
-<p>On a computer, all text is an encoded sequence of characters. A <em>character</em> is a symbol like a letter or number, punctuation, spaces/tabs/newlines, or special characters like “?”” or emojis.</p>
-<p>Unicode is the global standard for text encoding. It assigns every character to a code point. For example, capital <code>A</code> is <code>U+0041</code>, lowercase <code>a</code> is <code>U+0061</code>, and the number <code>1</code> is <code>U+0031</code>. Unicode covers all symbols in all scripts, plus many other characters. Some other examples are below.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>Symbol</th>
-<th>Code point</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>⽔</td>
-<td>U+2F54</td>
-</tr>
-<tr class="even">
-<td>(Space)</td>
-<td>U+0020</td>
-</tr>
-<tr class="odd">
-<td>अ</td>
-<td>U+0905</td>
-</tr>
-<tr class="even">
-<td>?</td>
-<td>U+003F</td>
-</tr>
-</tbody>
-</table>
-<p>You can search for any symbol you like <a href="https://www.compart.com/en/unicode/">here</a> and find its Unicode code point.</p>
-<p>Code points are turned into machine-readable representations by particular encoding schemes, which differ in how much memory they use. The most popular is <a href="https://en.wikipedia.org/wiki/UTF-8">UTF-8</a> (read more about this on the Wiki link).</p>
-</section>
-<section id="text-classification" class="level2">
-<h2 class="anchored" data-anchor-id="text-classification">Text classification</h2>
-<p>Let’s take text classification as an example. In class we talked about sentiment analysis, spam detection, and topic modeling, but there are many other subtypes too.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<div>
-<pre class="mermaid mermaid-js">flowchart TD
-    A(Text Classification) --- B(Sentiment analysis)
-    A --- C(Spam detection)
-    A --- D(Topic modeling)
-    A --- E(...)
-</pre>
-</div>
-</div>
-</div>
-</div>
-<p>In text classification, the input is a string (a sequence of characters). Let’s take sentiment analysis as an example.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-    A("Text string &lt;br&gt; `This movie was great`") --&gt; Z{Neural network}
-    Z --&gt; D("Positive ✓")
-    Z --&gt; E("Negative ✗")
-</pre>
-</div>
-</div>
-</div>
-</div>
-<p>In sentiment analysis, a model takes in a string and outputs a label, either <code>positive</code> or <code>negative</code>.</p>
-<p>In practice, the model is rarely 100% sure about the label, so it outputs probabilities. For example, if <code>'This movie was great.'</code> is the input, the model might output <code>0.9</code> for <code>positive</code> and <code>0.1</code> for <code>negative</code>.</p>
-<p>Next class, we’ll see a worked out example with a simple toy model.</p>
-<section id="word-embeddings" class="level3">
-<h3 class="anchored" data-anchor-id="word-embeddings">Word embeddings</h3>
-<p>If we’re doing text classification in English, then the <em>vocabulary</em> would consist of all English words (in the dictionary, let’s say).</p>
-<p>Each word in the vocabulary is just a sequence of characters, as far as the computer is concerned. It doesn’t know that <code>dog</code> is more similar in meaning to <code>canine</code> than it is to <code>philosophy</code>—all it sees are the characters.</p>
-<p>We need a <em>feature representation</em> of words that captures similarities and differences in meaning. So, we encode every word as a <em>vector</em>, a list of numbers. These numbers can be thought of as coordinates for points in a high-dimensional space.</p>
-<p>No matter how many dimensions a vector space has, we can always calculate the distance between points in the space.</p>
-</section>
-<section id="a-visualization" class="level3">
-<h3 class="anchored" data-anchor-id="a-visualization">A visualization</h3>
-<p>The job of <em>vector space embedding</em> is to assign coordinates to every word in the vocabulary, and do this so that similar words are relatively close together and dissimilar words are relatively far apart.</p>
-<p>To see an example, <a href="https://projector.tensorflow.org/">here</a> are some 200 dimensional word embeddings that have been projected down into 3 dimensions. (Think about shadow puppets: 3D objects project as 2D shadows on a flat surface. This is kind of like looking at 3D shadows of 200D points.)</p>
-<p>You can zoom and pan around and look at which words are closer together.</p>
-</section>
-</section>
-<section id="for-next-time" class="level2">
-<h2 class="anchored" data-anchor-id="for-next-time">For next time</h2>
-<p>Next class, we will see a toy example of text classification with low-dimensional feature representations of strings. From there, we will look at how higher-dimensional feature representations help models understand more about the meaning of the text.</p>
+<section id="homework" class="level1">
+<h1>Homework</h1>
+<section id="homework-1-binary-classification-and-matrix-math" class="level3">
+<h3 class="anchored" data-anchor-id="homework-1-binary-classification-and-matrix-math"><a href="../../pages/homework/homework1.html">Homework 1</a>: Binary classification and matrix math</h3>
 
 
 </section>

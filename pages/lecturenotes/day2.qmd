@@ -6,57 +6,113 @@ Today we built a one-layer sigmoid classifier to classify movie reviews into two
 
 ## Model setup
 
-The goal was to generate a "score" $z = xw + b$ for each movie review, and tweak the formula behind the scores so that positive reviews have higher scores and negative reviews have lower scores.
+The goal was to generate a score $$z = xw + b$$ for each movie review, and tweak the formula behind the scores so that positive reviews have higher scores and negative reviews have lower scores.
 
-Those scores can be any number, but in the end we want the model to guess whether the review is positive or negative. To do this, we use the sigmoid function, which squishes the real number line into the interval $(0,1)$. 
+The score $z$ can be any real number. But what we actually want is for the model to guess whether the review is positive or negative. To do this, we use the sigmoid function, which squishes the real number line into the interval $(0,1)$. 
 
 $$ \sigma(z) = \frac{1}{1 + \exp(-z)}$$
 
 
-```{python}
-import matplotlib.pyplot as plt
-import numpy as np
-
-x = np.linspace(-1, 1, 101)
-plt.plot(x, 1/(1+np.exp(-x))
-```
-
 The model's output is $\hat y = \sigma(z)$, a number between 0 and 1, which we can interpret as "the probability that review $x$ was a positive review".
+
+NOTE: The symbol $\sigma$ is the greek letter *sigma*. The sigmoid function is also known as the logistic function.
+
+```{python}
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Define the sigmoid function
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+# Generate x values
+x = np.linspace(-10, 10, 100)
+# Generate y values using the sigmoid function
+y = sigmoid(x)
+# Create the plot
+plt.figure(figsize=(8, 6))
+plt.style.use('dark_background')  # Set dark background style
+# Plot the sigmoid function
+plt.plot(x, y, label='Sigmoid', color='cyan', linewidth=2)
+# Plot solid lines at y=0 and y=1
+plt.axhline(0, color='white', linestyle='-', linewidth=1)
+plt.axhline(1, color='white', linestyle='-', linewidth=1)
+# Plot dashed horizontal line at y=0.5
+plt.axhline(0.5, color='white', linestyle='--', linewidth=1)
+
+# Customize the axes
+plt.xlabel('X-axis', fontsize=14)
+plt.ylabel('Y-axis', fontsize=14)
+plt.title('Sigmoid Function', fontsize=16)
+# Set y-axis ticks every 0.1
+plt.yticks(np.arange(0, 1.1, 0.1))
+# Set x-axis ticks every 1
+plt.xticks(np.arange(-10, 11, 1))
+
+# Customize the grid
+plt.grid(True, linestyle='--', alpha=0.5)
+
+# Add a legend
+plt.legend(loc='lower right')
+
+# Show the plot
+plt.show()
+
+```
 
 ## Hand-crafted features
 
-To make text digestible by machine models, we have to create *feature representations*. We discussed the difference between hand-crafted features, which are created by the modeller, and learned features, which are learned from data.
+To make text digestible by machine models, we have to encode it using *feature representations*. In class, we discussed the difference between hand-crafted features, which are created by the modeller, and learned features, which are learned from data.
 
-We came up with some fake movie reviews and discussed three hand-crafted features: word count, count of positive words, and count of negative words.
+We came up with some fake movie reviews and discussed three hand-crafted features: total word count, count of positive words, and count of negative words.
 
-Each review is encoded as a row of three numbers, representing the word count, the number of positive words, and the number of negative words, respectively
+Each review is encoded as a row of three numbers, representing the word count, the number of positive words, and the number of negative words, respectively. Here are four examples.
 
 ```{mermaid}
 flowchart LR
-    W["I was happy with this movie"] --> A["[6, 1, 0]"]
-    X["That was terrible"] --> B["[3, 0, 1]"]
-    Y["Great movie"] --> C["[2, 1, 0]"]
-    Z["The terrible acting actually made it funny"] --> D["[7, 1, 1]"]
+    W["+, I was happy with this great movie"] --> A["[6, 2, 0]"]
+    X["- , That was terrible"] --> B["[3, 0, 1]"]
+    Y["+, Great movie"] --> C["[2, 1, 0]"]
+    Z["-, The terrible acting actually made it fun to watch"] --> D["[7, 1, 1]"]
 
 ```
 
 
 ## Matrix multiplication
 
-To calculate the scores for multiple reviews at once, we use matrix multiplication. Each feature representation is a row of 3 numbers, so if we have 4 reviews in the dataset, then we end up with a $4\times 3$ matrix representing the dataset.
+To calculate the scores for multiple reviews at once, we use matrix multiplication. Each feature representation is a row of 3 numbers, so if we have 4 reviews in the dataset, then we end up with a $4\times 3$ matrix representing the dataset. $y$ is a vector representing the true labels of each example, 1 for positive and 0 for negative.
 
-$$x = \left[\begin{array}6 & 1 & 0 \\ 3 & 0 & 1 \\ 2 & 1 & 0 \\ 7 & 1 & 1 \end{array}\right]$$
+$$y = \left[\begin{array}{c} 1 \\ 0 \\ 1 \\ 0 \end{array}\right] \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, x = \left[\begin{array}{ccc} 6 & 2 & 0 \\ 3 & 0 & 1 \\ 2 & 1 & 0 \\ 7 & 1 & 1 \end{array}\right]$$
 
 
-Our weights will be a $3 \times 1$ matrix, and our bias will be a single number. I didn't show this in class, but we have to repeat the bias number 4 times so that it has the same shape $4 \times 1$ as $xw$.
+Our weights will be a $3 \times 1$ matrix, and our bias will be a single number. I didn't show this in class, but we have to write the bias number 4 times in a column vector, so that it has the same shape as $xw$ ($4 \times 1$).
 
-Here's an example weight matrix.
+Here's an example weight matrix (in this case the weights are a $3 \times 1$ column vector).
 
-$$w = \left[\begin{array} -1 \\ 2 \\ -2 \end{array}\right]$$
+$$w = \left[\begin{array}{ccc} -1 \\ 2 \\ -2 \end{array}\right]$$
 
 (In class we made the weight for the word count positive, but if we think that negative reviews have higher word counts, then we should actually make it negative.)
 
-If our bias is $-5$, then we end up with the following $z$ scores.
+If our bias is $+4$, then we end up with the following $z$ scores.
 
-$$z = wx + b = \left[\begin{array}6 & 1 & 0 \\ 3 & 0 & 1 \\ 2 & 1 & 0 \\ 7 & 1 & 1 \end{array}\right] \left[\begin{array} -1 \\ 2 \\ -2 \end{array}\right] + $\end{array}\right] \left[\begin{array} -5 \\ -5 \\ -5 \\ -5 \end{array}\right]$$
+$$z = xw + b = \left[\begin{array}{ccc} 6 & 2 & 0 \\ 3 & 0 & 1 \\ 2 & 1 & 0 \\ 7 & 1 & 1 \end{array}\right] \left[\begin{array}{ccc} -1 \\ 2 \\ -2 \end{array}\right] + \left[\begin{array}{ccc} 4 \\ 4 \\ 4 \\ 4 \end{array}\right]$$
 
+$$= \left[\begin{array}{ccc} 6 \cdot (-1) + 2 \cdot 2 + 0 \cdot (-2) \\ 3 \cdot (-1) + 0 \cdot 2 + 1 \cdot (-2) \\ 2 \cdot (-1) + 1 \cdot 2 + 0 \cdot (-2) \\ 7 \cdot (-1) + 1 \cdot 2 + 1 \cdot (-2) \end{array}\right]  + \left[\begin{array}{ccc} 4 \\ 4 \\ 4 \\ 4 \end{array}\right] = \left[\begin{array}{ccc} -2 \\ -5 \\ 0 \\ -7 \end{array}\right]  + \left[\begin{array}{ccc} 4 \\ 4 \\ 4 \\ 4 \end{array}\right] = \left[\begin{array}{ccc} 2 \\ -1 \\ 4 \\ -3 \end{array}\right]$$
+
+With these weights and biases, we end up with positive $z$ for reviews 1 and 3, and negative $z$ for reviews 2 and 4. The sigmoid $\sigma$ function will turn the positive $z$ scores into probabilities greater than 0.5, and negative z scores into probabilities smaller than 0.5. Sigmoid takes in a single number, so we apply it element-wise (meaning, to each element of the vector).
+
+$$\hat y = \sigma(z) = \sigma\left(\left[\begin{array}{c} 2 \\ -1 \\ 4 \\ -3 \end{array}\right]\right) = \left[\begin{array}{c} \sigma(2) \\ \sigma(-1) \\ \sigma(4) \\ \sigma(-3) \end{array}\right] = \left[\begin{array}{c} 0.88 \\ 0.27 \\ 0.95 \\ 0.05 \end{array}\right]$$
+
+Recall that the true labels were:
+
+$$y = \left[\begin{array}{c} 1 \\ 0 \\ 1 \\ 0 \end{array}\right]$$
+
+We can look at the differences between the true labels $y$ and the predicted labels $\hat y$. The goal is to approximate the true labels as closely as possible, so the smaller these differences are, the better our model is.
+
+$$y  - \hat y = \left[\begin{array}{c} 1 \\ 0 \\ 1 \\ 0 \end{array}\right] - \left[\begin{array}{c} 0.88 \\ 0.27 \\ 0.95 \\ 0.05 \end{array}\right] \,\,\,\, = \,\,\,\, \left[\begin{array}{c} 0.12 \\ -0.27 \\ 0.05 \\ -0.05 \end{array}\right]$$
+
+## Summing up
+
+We now know how to write down the formulas for one-layer sigmoid classifier and apply it to binary text classification. In the future, we'll look at the softmax function for multi-class classification (where there are more than two output labels).
+
+We'll also start to look at *representation learning*, the art of learning features from data (rather than hand-crafting them, like we've done here).
