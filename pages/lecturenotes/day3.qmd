@@ -1,4 +1,88 @@
 # Day 3
 
 ## Content
-Today we'll talk about learning word embeddings from data.
+Today we saw our first example of learned document embeddings, namely the bag-of-words feature representation for documents.
+
+## Learning features from data
+
+In our first version of the binary classifier, we used simple hand-crafted features to encode documents. Each document (movie review) was encoded as a row of three numbers: total word count, positive word count, and negative word count.
+
+This is usually not enough. In most cases, it is better to learn a feature representation from the data itself. Today we saw the most basic possible way to do this with text data: bag-of-words encoding.
+
+A bag-of-words encoding for a document is a vector of counts. To create bag-of-words encodings, we have to start by finding each unique word in the dataset and giving it its own column. 
+
+## Bag of words example
+
+Here is an example:
+
+1. what a waste of time
+2. that was a great time
+3. bad acting
+4. a dull movie from a great director
+
+**List of unique words:** `what`, `a`, `waste`, `of`, `time`,`that`, `was`, `great`, `acting`, `bad`, `dull`, `from`, `director`
+
+We have 4 reviews with 13 unique words. So we will end up with a $4 \times 14$ feature matrix $x$.
+
+$$\begin{array}{cccccccccccccc}
+\text{what} & \text{a} & \text{waste} & \text{of} & \text{time} & \text{that} & \text{was} & \text{great}  & \text{acting} & \text{bad} & \text{movie} & \text{dull} & \text{from} & \text{director} \\
+1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 \\
+0 & 2 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 1 & 1 & 1 \\
+\end{array}$$
+
+We will need to multiply this with a $14 \times 1$ weight matrix $w$ in order to get a single number $z$. (Let's ignore the bias for now, assume it's $0$.) Let's assume that most words are zero (no effect), $\text{great}$ is $+1$, and $\text{waste, bad, dull}$ are each -1.
+$$ \begin{array}{cc} \text{what} & 0 \\
+\text{a} & 0 \\
+\text{waste} & -1 \\
+\text{of} & 0 \\
+\text{time} & 0 \\
+\text{that} & 0 \\
+\text{was} & 0 \\
+\text{great} & 1 \\
+\text{acting} & 0 \\
+\text{bad} & -1 \\
+\text{movie} & 0 \\
+\text{dull} & -1 \\
+\text{from} & 0 \\
+\text{director} & 0 \\
+\end{array}$$
+One important point: These weights are chosen *for sentiment analysis specifically*. If we were doing a different kind of classification task (for example, trying to classify texts by topic) the weights would look totally different.
+
+## Forward pass: calculating model predictions
+
+Now let's do the forward pass.
+
+$$z = xw = \left[\begin{array}{cccccccccccccc}
+1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 \\
+0 & 2 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 1 & 1 & 1 \\
+\end{array}\right]\left[\begin{array}{c} 0 \\
+0 \\
+-1 \\
+0 \\
+0 \\
+0 \\
+ 0 \\
+1 \\
+ 0 \\
+-1 \\
+ 0 \\
+-1 \\
+ 0 \\
+ 0 \end{array}\right]$$$$= \left[\begin{array}{c} 1 \cdot 0 + 1 \cdot 0 + 1 \cdot (-1) + 1 \cdot 0 + 1 \cdot 0+ 1 \cdot 0 + 0 \cdot 0 + 0 \cdot 1 + 0 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 0 \cdot 0 \\ 
+ 0 \cdot 0 + 1 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 1 \cdot 0+ 1 \cdot 0 + 1 \cdot 0 + 1 \cdot 1 + 0 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 0 \cdot 0  \\ 0 \cdot 0 + 0 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 1 \cdot 0+ 1 \cdot 0 + 1 \cdot 0 + 0 \cdot 1 + 1 \cdot 0 + 1 \cdot (-1) + 0 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 0 \cdot 0 \\  0 \cdot 0 + 2 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 0 \cdot 0 + 0 \cdot 0 + 0 \cdot 0 + 1 \cdot 1 + 0 \cdot 0 + 0 \cdot (-1) + 1 \cdot 0 + 1 \cdot (-1) + 1 \cdot 0 + 1 \cdot 0 \\ \end{array}\right]$$
+$$= \left[\begin{array}{c} -1 \\ 1 \\ -1 \\ -1 \end{array}\right]$$
+Our predictions are
+
+$$\hat y = \sigma(z) = \sigma\left(\left[\begin{array}{c} -1 \\ 1 \\ -1 \\ -1 \end{array}\right]\right) = \left[\begin{array}{c} 1/(1+e) \\ 1/(1+(1/e)) \\ 1/(1+e) \\ 1/(1+e) \end{array}\right] = \left[\begin{array}{c} 0.27 \\ 0.73 \\ 0.27 \\ 0.27 \end{array}\right]$$
+
+## Summing up
+
+This is the simplest possible setup that lets us encode documents using features that are learned from the data (not just hand-crafted). Although bag-of-words representations can work ok in some situations, there are much better ways to learn embeddings.
+
+Next week, we'll look an approach that is a step up from this: term frequency-inverse document frequency (tf-idf) encoding.
+
+Later on, we'll learn an even better method: pre-trained word embeddings (e.g. word2vec), where a specialized neural network is used to learn vector representations for every word in the vocabulary.

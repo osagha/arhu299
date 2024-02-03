@@ -62,6 +62,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -119,6 +121,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#day-3" id="toc-day-3" class="nav-link active" data-scroll-target="#day-3">Day 3</a>
   <ul class="collapse">
   <li><a href="#content" id="toc-content" class="nav-link" data-scroll-target="#content">Content</a></li>
+  <li><a href="#learning-features-from-data" id="toc-learning-features-from-data" class="nav-link" data-scroll-target="#learning-features-from-data">Learning features from data</a></li>
+  <li><a href="#bag-of-words-example" id="toc-bag-of-words-example" class="nav-link" data-scroll-target="#bag-of-words-example">Bag of words example</a></li>
+  <li><a href="#forward-pass-calculating-model-predictions" id="toc-forward-pass-calculating-model-predictions" class="nav-link" data-scroll-target="#forward-pass-calculating-model-predictions">Forward pass: calculating model predictions</a></li>
+  <li><a href="#summing-up" id="toc-summing-up" class="nav-link" data-scroll-target="#summing-up">Summing up</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -132,7 +138,78 @@ ul.task-list li input[type="checkbox"] {
 <h1>Day 3</h1>
 <section id="content" class="level2">
 <h2 class="anchored" data-anchor-id="content">Content</h2>
-<p>Today we’ll talk about learning word embeddings from data.</p>
+<p>Today we saw our first example of learned document embeddings, namely the bag-of-words feature representation for documents.</p>
+</section>
+<section id="learning-features-from-data" class="level2">
+<h2 class="anchored" data-anchor-id="learning-features-from-data">Learning features from data</h2>
+<p>In our first version of the binary classifier, we used simple hand-crafted features to encode documents. Each document (movie review) was encoded as a row of three numbers: total word count, positive word count, and negative word count.</p>
+<p>This is usually not enough. In most cases, it is better to learn a feature representation from the data itself. Today we saw the most basic possible way to do this with text data: bag-of-words encoding.</p>
+<p>A bag-of-words encoding for a document is a vector of counts. To create bag-of-words encodings, we have to start by finding each unique word in the dataset and giving it its own column.</p>
+</section>
+<section id="bag-of-words-example" class="level2">
+<h2 class="anchored" data-anchor-id="bag-of-words-example">Bag of words example</h2>
+<p>Here is an example:</p>
+<ol type="1">
+<li>what a waste of time</li>
+<li>that was a great time</li>
+<li>bad acting</li>
+<li>a dull movie from a great director</li>
+</ol>
+<p><strong>List of unique words:</strong> <code>what</code>, <code>a</code>, <code>waste</code>, <code>of</code>, <code>time</code>,<code>that</code>, <code>was</code>, <code>great</code>, <code>acting</code>, <code>bad</code>, <code>dull</code>, <code>from</code>, <code>director</code></p>
+<p>We have 4 reviews with 13 unique words. So we will end up with a <span class="math inline">\(4 \times 14\)</span> feature matrix <span class="math inline">\(x\)</span>.</p>
+<p><span class="math display">\[\begin{array}{cccccccccccccc}
+\text{what} &amp; \text{a} &amp; \text{waste} &amp; \text{of} &amp; \text{time} &amp; \text{that} &amp; \text{was} &amp; \text{great}  &amp; \text{acting} &amp; \text{bad} &amp; \text{movie} &amp; \text{dull} &amp; \text{from} &amp; \text{director} \\
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 2 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\
+\end{array}\]</span></p>
+<p>We will need to multiply this with a <span class="math inline">\(14 \times 1\)</span> weight matrix <span class="math inline">\(w\)</span> in order to get a single number <span class="math inline">\(z\)</span>. (Let’s ignore the bias for now, assume it’s <span class="math inline">\(0\)</span>.) Let’s assume that most words are zero (no effect), <span class="math inline">\(\text{great}\)</span> is <span class="math inline">\(+1\)</span>, and <span class="math inline">\(\text{waste, bad, dull}\)</span> are each -1. <span class="math display">\[ \begin{array}{cc} \text{what} &amp; 0 \\
+\text{a} &amp; 0 \\
+\text{waste} &amp; -1 \\
+\text{of} &amp; 0 \\
+\text{time} &amp; 0 \\
+\text{that} &amp; 0 \\
+\text{was} &amp; 0 \\
+\text{great} &amp; 1 \\
+\text{acting} &amp; 0 \\
+\text{bad} &amp; -1 \\
+\text{movie} &amp; 0 \\
+\text{dull} &amp; -1 \\
+\text{from} &amp; 0 \\
+\text{director} &amp; 0 \\
+\end{array}\]</span> One important point: These weights are chosen <em>for sentiment analysis specifically</em>. If we were doing a different kind of classification task (for example, trying to classify texts by topic) the weights would look totally different.</p>
+</section>
+<section id="forward-pass-calculating-model-predictions" class="level2">
+<h2 class="anchored" data-anchor-id="forward-pass-calculating-model-predictions">Forward pass: calculating model predictions</h2>
+<p>Now let’s do the forward pass.</p>
+<p><span class="math display">\[z = xw = \left[\begin{array}{cccccccccccccc}
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 2 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\
+\end{array}\right]\left[\begin{array}{c} 0 \\
+0 \\
+-1 \\
+0 \\
+0 \\
+0 \\
+0 \\
+1 \\
+0 \\
+-1 \\
+0 \\
+-1 \\
+0 \\
+0 \end{array}\right]\]</span><span class="math display">\[= \left[\begin{array}{c} 1 \cdot 0 + 1 \cdot 0 + 1 \cdot (-1) + 1 \cdot 0 + 1 \cdot 0+ 1 \cdot 0 + 0 \cdot 0 + 0 \cdot 1 + 0 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 0 \cdot 0 \\
+0 \cdot 0 + 1 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 1 \cdot 0+ 1 \cdot 0 + 1 \cdot 0 + 1 \cdot 1 + 0 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 0 \cdot 0  \\ 0 \cdot 0 + 0 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 1 \cdot 0+ 1 \cdot 0 + 1 \cdot 0 + 0 \cdot 1 + 1 \cdot 0 + 1 \cdot (-1) + 0 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 0 \cdot 0 \\  0 \cdot 0 + 2 \cdot 0 + 0 \cdot (-1) + 0 \cdot 0 + 0 \cdot 0 + 0 \cdot 0 + 0 \cdot 0 + 1 \cdot 1 + 0 \cdot 0 + 0 \cdot (-1) + 1 \cdot 0 + 1 \cdot (-1) + 1 \cdot 0 + 1 \cdot 0 \\ \end{array}\right]\]</span> <span class="math display">\[= \left[\begin{array}{c} -1 \\ 1 \\ -1 \\ -1 \end{array}\right]\]</span> Our predictions are</p>
+<p><span class="math display">\[\hat y = \sigma(z) = \sigma\left(\left[\begin{array}{c} -1 \\ 1 \\ -1 \\ -1 \end{array}\right]\right) = \left[\begin{array}{c} 1/(1+e) \\ 1/(1+(1/e)) \\ 1/(1+e) \\ 1/(1+e) \end{array}\right] = \left[\begin{array}{c} 0.27 \\ 0.73 \\ 0.27 \\ 0.27 \end{array}\right]\]</span></p>
+</section>
+<section id="summing-up" class="level2">
+<h2 class="anchored" data-anchor-id="summing-up">Summing up</h2>
+<p>This is the simplest possible setup that lets us encode documents using features that are learned from the data (not just hand-crafted). Although bag-of-words representations can work ok in some situations, there are much better ways to learn embeddings.</p>
+<p>Next week, we’ll look an approach that is a step up from this: term frequency-inverse document frequency (tf-idf) encoding.</p>
+<p>Later on, we’ll learn an even better method: pre-trained word embeddings (e.g.&nbsp;word2vec), where a specialized neural network is used to learn vector representations for every word in the vocabulary.</p>
 
 
 </section>
