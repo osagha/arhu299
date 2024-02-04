@@ -22,7 +22,7 @@ Here is an example:
 
 **List of unique words:** `what`, `a`, `waste`, `of`, `time`,`that`, `was`, `great`, `acting`, `bad`, `dull`, `from`, `director`
 
-We have 4 reviews with 13 unique words. So we will end up with a $4 \times 14$ feature matrix $x$.
+We have 4 reviews with 14 unique words. So we will end up with a $4 \times 14$ feature matrix $x$.
 
 $$\begin{array}{cccccccccccccc}
 \text{what} & \text{a} & \text{waste} & \text{of} & \text{time} & \text{that} & \text{was} & \text{great}  & \text{acting} & \text{bad} & \text{movie} & \text{dull} & \text{from} & \text{director} \\
