@@ -1,0 +1,111 @@
+# Day 4
+
+## Content
+
+On 2/6/24, we reviewed the bag-of-words encoding for documents, and learned about a more interesting and useful encoding. The more useful one is called *term frequency-inverse document frequency (tf-idf)*. 
+
+It is kind of like a bag-of-words encoding, but gives *more* weight to informative (discriminative) words, and *less* weight to non-informative (non-discriminative) words like `the`, `and`, etc, which are usually less helpful for classification.
+
+## The document-term matrix
+
+When we were looking at the bag-of-words encoding, we learned how to encode a dataset as a matrix like this one. This is called a **document-term matrix**, because each row represents a document, and each column represents a term (a word).
+
+Here is a subset of a document-term matrix for some Shakespeare plays, focusing on just four words.
+$$\begin{array}{ccccc} & battle & good & fool & wit \\ 
+\text{As You Like It} & 1 & 114 & 36 & 20 \\
+\text{Twelfth Night} & 0 & 80 & 58 & 15 \\
+\text{Julius Caesar} & 7 & 62 & 1 & 2 \\
+\text{Henry V} & 12 & 89 & 4 & 3\end{array}$$
+Each document is a single Shakespeare play. The columns tell us the counts of four words in those plays. 
+
+We can (partly) visualize the differences between these plays by looking at the occurrences of words. For example, the tragedies have a higher occurrence of `battle` and a lower occurrence of `fool`, while the comedies have more `fool` and less `battle`. (Source: Jurafsky and Martin, *Speech and Language Processing* 3rd edition, Chapter 6, page 112, Figure 6.4 [link here](https://web.stanford.edu/~jurafsky/slp3/ed3bookfeb3_2024.pdf))
+
+If you take a look at that image, we can see that word counts can provide a notion of *document similarity*: More similar documents will have more similar word counts (at least for some important words) and dissimilar documents will have dissimilar word counts.
+
+## Term frequency
+
+The most basic kind of **term frequency** is a word count. The term frequency of a word is just the number of times the term occurs in a document. $$TF[d, t] = \text{number of times term $t$ occurs in doc. $d$}$$Each of the numbers in the document-term matrix is a term frequency.
+$$\begin{array}{ccccc} & battle & good & fool & wit \\ 
+\text{As You Like It} & 1 & 114 & 36 & 20 \\
+\text{Twelfth Night} & 0 & 80 & 58 & 15 \\
+\text{Julius Caesar} & 7 & 62 & 1 & 2 \\
+\text{Henry V} & 12 & 89 & 4 & 3\end{array}$$
+As we saw, term frequencies give us information about similarities and differences between documents. But this information is noisy for two reasons.
+
+* Problem 1: The important words don't stick out enough.
+* Problem 2: The useless words stick out too much.
+
+## Discriminative words
+
+Certain words show up in only a few documents, and therefore provide more information than words that show up all over the place. These words help us *discriminate* between document types.
+
+Information that helps us distinguish between data points is called **discriminative**, and information that does not is called **non-discriminative**.
+
+We would like to give the discriminative words a bump up by scaling up their feature representation, and tamp down the importance of non-discriminative words by scaling down their feature representations.
+
+## Inverse document frequency
+
+To scale our feature representations so that the numbers representing discriminative words are relatively higher, and the numbers representing non-discriminative words are lower, we use the **inverse document frequency**.
+
+First, we look at the **document frequency** of each word. $$DF[t] = \text{number of documents containing term } t$$
+Then we get the **inverse document frequency** (IDF) for that term. The IDF is the total number of documents $N$ divided by the number of documents $t$ occurs in ($DF[t]$).
+$$ IDF[t] = \frac{N}{DF[t]}\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, N = \text{total number of docs}$$
+When we multiply the term frequencies by the inverse document frequencies, we get new numbers for each term. Compared to the raw term frequencies (the counts in the bag-of-words matrix) the new numbers are *bigger* when the document frequency is *lower* (more discriminative), and *smaller* when the term's document frequency is *higher* (less discriminative).
+
+$$\begin{array}{cccc} \text{term occurs in more docs (less discriminative)} & \rightarrow & \text{high } DF[t] & \rightarrow & \text{low } IDF[t] \\
+\text{term occurs in fewer docs (more discriminative)} & \rightarrow & \text{low } DF[t] & \rightarrow & \text{high } IDF[t] \\\end{array}$$
+The TF-IDF score is just the product of the term frequency and the document frequency.
+$$TFIDF[d,t] = TF[d,t]\cdot IDF[t] = TF[d,t]\cdot \frac{N}{DF[t]}$$
+
+## Example
+
+Suppose we have 5 words and 5 documents. We can see that words like `the` or `a` show up very frequently, words like `and` or `might` show up somewhat frequently, and words like `terrific` show up very infrequently.
+
+$$\begin{array}{cccccc} \text{the} & \text{a} & \text{and} & \text{might} & \text{terrific}  \\
+5 & 2 & 0 & 0 & 1 \\
+2 & 3 & 1 & 0 & 0 \\
+3 & 4 & 0 & 0 & 0 \\
+2 & 2 & 3 & 2 & 0 \\
+1 & 0 & 1 & 1 & 0 \\
+\end{array}$$
+Let's calculate the document frequency and inverse document frequency for each word.
+
+$$\begin{array}{} & \text{the} & \text{a} & \text{and} & \text{might} & \text{terrific}  \\
+DF[t] & 5 & 4 & 3 & 2 & 1 \\
+IDF[t] & 1 & 5/4 & 5/3 & 5/2 & 5 \\
+\end{array}$$
+
+If we scale the term frequencies by the inverse document frequencies, we end with a feature representation where words that appear in fewer documents get higher scores. 
+
+The first column `the` remains the same, because its IDF is 1. The last column gets scaled up the most, so `terrific` now has the TFIDF score of 5, even though its count was just 1
+
+$$\begin{array}{cccccc} \text{the} & \text{a} & \text{and} & \text{might} & \text{terrific}  \\
+5 & 5/2  & 0 & 0 & 5 \\
+2 & 15/4 & 5/3 & 0 & 0 \\
+3 & 5    & 0 & 0 & 0 \\
+2 & 10/4 & 5 & 5 & 0 \\
+1 & 0    & 5/3 & 5/2 & 0 \\
+\end{array}$$
+
+## Log scaling
+
+Notice that in the example, the word `terrific`'s TFIDF score is $5\times$ higher than its count. If we had $N=1000$ documents, and the word `terrific` only appeared *once* in *one document*, then IDF[`terrific`] would be $1000$ even though its count is just $1$!
+
+This is out of proportion. We want to scale up infrequent words, but not so much that they drown out all the other information.
+
+The solution is to use logarithms. Instead of using the raw frequencies for TF and IDF, we log scale them. Here are the new definitions. 
+
+The raw counts are the numbers in the bag-of-words matrix.
+
+$$count[d,t] = \text{number of times term $t$ appears in document $d$}$$
+
+The term frequency is now 1 plus the log of the count.
+$$TF[d,t] = 1 + \log_{10}(count[d,t])$$
+The document frequency is the number of documents a term occurs in, just as before.
+$$DF[t] = \text{number of documents term $t$ occurs in}$$
+The inverse document frequency is now the log of the old document frequency ($N$ over $DF[t]$]).
+$$IDF[t] = \log_{10}\left(\frac{N}{DF[t]}\right)$$
+
+## For next time
+
+Next time we'll see a worked-out example of TFIDF with log-scaling. We'll also start using Python to calculate the model outputs.

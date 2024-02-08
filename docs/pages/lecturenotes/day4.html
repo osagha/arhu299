@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ARHU299 – index</title>
+<title>ARHU299 – day4</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,6 +62,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -88,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Syllabus</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../pages/lecturenotes/index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../../pages/lecturenotes/index.html" rel="" target="">
  <span class="menu-text">Lecture Notes</span></a>
   </li>  
   <li class="nav-item">
@@ -116,12 +118,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lecture-notes" id="toc-lecture-notes" class="nav-link active" data-scroll-target="#lecture-notes">Lecture Notes</a>
+  <li><a href="#day-4" id="toc-day-4" class="nav-link active" data-scroll-target="#day-4">Day 4</a>
   <ul class="collapse">
-  <li><a href="#day-1-intro-text-encoding-features-classification" id="toc-day-1-intro-text-encoding-features-classification" class="nav-link" data-scroll-target="#day-1-intro-text-encoding-features-classification">Day 1: Intro, Text Encoding, Features, Classification</a></li>
-  <li><a href="#day-2-binary-classification-with-hand-crafted-features" id="toc-day-2-binary-classification-with-hand-crafted-features" class="nav-link" data-scroll-target="#day-2-binary-classification-with-hand-crafted-features">Day 2: Binary classification with hand-crafted features</a></li>
-  <li><a href="#day-3-learning-bag-of-words-features" id="toc-day-3-learning-bag-of-words-features" class="nav-link" data-scroll-target="#day-3-learning-bag-of-words-features">Day 3: Learning bag-of-words features</a></li>
-  <li><a href="#day-4-tfidf-encoding-part-1" id="toc-day-4-tfidf-encoding-part-1" class="nav-link" data-scroll-target="#day-4-tfidf-encoding-part-1">Day 4: TFIDF encoding, part 1</a></li>
+  <li><a href="#content" id="toc-content" class="nav-link" data-scroll-target="#content">Content</a></li>
+  <li><a href="#the-document-term-matrix" id="toc-the-document-term-matrix" class="nav-link" data-scroll-target="#the-document-term-matrix">The document-term matrix</a></li>
+  <li><a href="#term-frequency" id="toc-term-frequency" class="nav-link" data-scroll-target="#term-frequency">Term frequency</a></li>
+  <li><a href="#discriminative-words" id="toc-discriminative-words" class="nav-link" data-scroll-target="#discriminative-words">Discriminative words</a></li>
+  <li><a href="#inverse-document-frequency" id="toc-inverse-document-frequency" class="nav-link" data-scroll-target="#inverse-document-frequency">Inverse document frequency</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#log-scaling" id="toc-log-scaling" class="nav-link" data-scroll-target="#log-scaling">Log scaling</a></li>
+  <li><a href="#for-next-time" id="toc-for-next-time" class="nav-link" data-scroll-target="#for-next-time">For next time</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -131,19 +137,85 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="lecture-notes" class="level1">
-<h1>Lecture Notes</h1>
-<section id="day-1-intro-text-encoding-features-classification" class="level3">
-<h3 class="anchored" data-anchor-id="day-1-intro-text-encoding-features-classification"><a href="../../pages/lecturenotes/day1.html">Day 1</a>: Intro, Text Encoding, Features, Classification</h3>
+<section id="day-4" class="level1">
+<h1>Day 4</h1>
+<section id="content" class="level2">
+<h2 class="anchored" data-anchor-id="content">Content</h2>
+<p>On 2/6/24, we reviewed the bag-of-words encoding for documents, and learned about a more interesting and useful encoding. The more useful one is called <em>term frequency-inverse document frequency (tf-idf)</em>.</p>
+<p>It is kind of like a bag-of-words encoding, but gives <em>more</em> weight to informative (discriminative) words, and <em>less</em> weight to non-informative (non-discriminative) words like <code>the</code>, <code>and</code>, etc, which are usually less helpful for classification.</p>
 </section>
-<section id="day-2-binary-classification-with-hand-crafted-features" class="level3">
-<h3 class="anchored" data-anchor-id="day-2-binary-classification-with-hand-crafted-features"><a href="../../pages/lecturenotes/day2.html">Day 2</a>: Binary classification with hand-crafted features</h3>
+<section id="the-document-term-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="the-document-term-matrix">The document-term matrix</h2>
+<p>When we were looking at the bag-of-words encoding, we learned how to encode a dataset as a matrix like this one. This is called a <strong>document-term matrix</strong>, because each row represents a document, and each column represents a term (a word).</p>
+<p>Here is a subset of a document-term matrix for some Shakespeare plays, focusing on just four words. <span class="math display">\[\begin{array}{ccccc} &amp; battle &amp; good &amp; fool &amp; wit \\
+\text{As You Like It} &amp; 1 &amp; 114 &amp; 36 &amp; 20 \\
+\text{Twelfth Night} &amp; 0 &amp; 80 &amp; 58 &amp; 15 \\
+\text{Julius Caesar} &amp; 7 &amp; 62 &amp; 1 &amp; 2 \\
+\text{Henry V} &amp; 12 &amp; 89 &amp; 4 &amp; 3\end{array}\]</span> Each document is a single Shakespeare play. The columns tell us the counts of four words in those plays.</p>
+<p>We can (partly) visualize the differences between these plays by looking at the occurrences of words. For example, the tragedies have a higher occurrence of <code>battle</code> and a lower occurrence of <code>fool</code>, while the comedies have more <code>fool</code> and less <code>battle</code>. (Source: Jurafsky and Martin, <em>Speech and Language Processing</em> 3rd edition, Chapter 6, page 112, Figure 6.4 <a href="https://web.stanford.edu/~jurafsky/slp3/ed3bookfeb3_2024.pdf">link here</a>)</p>
+<p>If you take a look at that image, we can see that word counts can provide a notion of <em>document similarity</em>: More similar documents will have more similar word counts (at least for some important words) and dissimilar documents will have dissimilar word counts.</p>
 </section>
-<section id="day-3-learning-bag-of-words-features" class="level3">
-<h3 class="anchored" data-anchor-id="day-3-learning-bag-of-words-features"><a href="../../pages/lecturenotes/day3.html">Day 3</a>: Learning bag-of-words features</h3>
+<section id="term-frequency" class="level2">
+<h2 class="anchored" data-anchor-id="term-frequency">Term frequency</h2>
+<p>The most basic kind of <strong>term frequency</strong> is a word count. The term frequency of a word is just the number of times the term occurs in a document. <span class="math display">\[TF[d, t] = \text{number of times term $t$ occurs in doc. $d$}\]</span>Each of the numbers in the document-term matrix is a term frequency. <span class="math display">\[\begin{array}{ccccc} &amp; battle &amp; good &amp; fool &amp; wit \\
+\text{As You Like It} &amp; 1 &amp; 114 &amp; 36 &amp; 20 \\
+\text{Twelfth Night} &amp; 0 &amp; 80 &amp; 58 &amp; 15 \\
+\text{Julius Caesar} &amp; 7 &amp; 62 &amp; 1 &amp; 2 \\
+\text{Henry V} &amp; 12 &amp; 89 &amp; 4 &amp; 3\end{array}\]</span> As we saw, term frequencies give us information about similarities and differences between documents. But this information is noisy for two reasons.</p>
+<ul>
+<li>Problem 1: The important words don’t stick out enough.</li>
+<li>Problem 2: The useless words stick out too much.</li>
+</ul>
 </section>
-<section id="day-4-tfidf-encoding-part-1" class="level3">
-<h3 class="anchored" data-anchor-id="day-4-tfidf-encoding-part-1"><a href="../../pages/lecturenotes/day4.html">Day 4</a>: TFIDF encoding, part 1</h3>
+<section id="discriminative-words" class="level2">
+<h2 class="anchored" data-anchor-id="discriminative-words">Discriminative words</h2>
+<p>Certain words show up in only a few documents, and therefore provide more information than words that show up all over the place. These words help us <em>discriminate</em> between document types.</p>
+<p>Information that helps us distinguish between data points is called <strong>discriminative</strong>, and information that does not is called <strong>non-discriminative</strong>.</p>
+<p>We would like to give the discriminative words a bump up by scaling up their feature representation, and tamp down the importance of non-discriminative words by scaling down their feature representations.</p>
+</section>
+<section id="inverse-document-frequency" class="level2">
+<h2 class="anchored" data-anchor-id="inverse-document-frequency">Inverse document frequency</h2>
+<p>To scale our feature representations so that the numbers representing discriminative words are relatively higher, and the numbers representing non-discriminative words are lower, we use the <strong>inverse document frequency</strong>.</p>
+<p>First, we look at the <strong>document frequency</strong> of each word. <span class="math display">\[DF[t] = \text{number of documents containing term } t\]</span> Then we get the <strong>inverse document frequency</strong> (IDF) for that term. The IDF is the total number of documents <span class="math inline">\(N\)</span> divided by the number of documents <span class="math inline">\(t\)</span> occurs in (<span class="math inline">\(DF[t]\)</span>). <span class="math display">\[ IDF[t] = \frac{N}{DF[t]}\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, N = \text{total number of docs}\]</span> When we multiply the term frequencies by the inverse document frequencies, we get new numbers for each term. Compared to the raw term frequencies (the counts in the bag-of-words matrix) the new numbers are <em>bigger</em> when the document frequency is <em>lower</em> (more discriminative), and <em>smaller</em> when the term’s document frequency is <em>higher</em> (less discriminative).</p>
+<p><span class="math display">\[\begin{array}{cccc} \text{term occurs in more docs (less discriminative)} &amp; \rightarrow &amp; \text{high } DF[t] &amp; \rightarrow &amp; \text{low } IDF[t] \\
+\text{term occurs in fewer docs (more discriminative)} &amp; \rightarrow &amp; \text{low } DF[t] &amp; \rightarrow &amp; \text{high } IDF[t] \\\end{array}\]</span> The TF-IDF score is just the product of the term frequency and the document frequency. <span class="math display">\[TFIDF[d,t] = TF[d,t]\cdot IDF[t] = TF[d,t]\cdot \frac{N}{DF[t]}\]</span></p>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>Suppose we have 5 words and 5 documents. We can see that words like <code>the</code> or <code>a</code> show up very frequently, words like <code>and</code> or <code>might</code> show up somewhat frequently, and words like <code>terrific</code> show up very infrequently.</p>
+<p><span class="math display">\[\begin{array}{cccccc} \text{the} &amp; \text{a} &amp; \text{and} &amp; \text{might} &amp; \text{terrific}  \\
+5 &amp; 2 &amp; 0 &amp; 0 &amp; 1 \\
+2 &amp; 3 &amp; 1 &amp; 0 &amp; 0 \\
+3 &amp; 4 &amp; 0 &amp; 0 &amp; 0 \\
+2 &amp; 2 &amp; 3 &amp; 2 &amp; 0 \\
+1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 \\
+\end{array}\]</span> Let’s calculate the document frequency and inverse document frequency for each word.</p>
+<p><span class="math display">\[\begin{array}{} &amp; \text{the} &amp; \text{a} &amp; \text{and} &amp; \text{might} &amp; \text{terrific}  \\
+DF[t] &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; 1 \\
+IDF[t] &amp; 1 &amp; 5/4 &amp; 5/3 &amp; 5/2 &amp; 5 \\
+\end{array}\]</span></p>
+<p>If we scale the term frequencies by the inverse document frequencies, we end with a feature representation where words that appear in fewer documents get higher scores.</p>
+<p>The first column <code>the</code> remains the same, because its IDF is 1. The last column gets scaled up the most, so <code>terrific</code> now has the TFIDF score of 5, even though its count was just 1</p>
+<p><span class="math display">\[\begin{array}{cccccc} \text{the} &amp; \text{a} &amp; \text{and} &amp; \text{might} &amp; \text{terrific}  \\
+5 &amp; 5/2  &amp; 0 &amp; 0 &amp; 5 \\
+2 &amp; 15/4 &amp; 5/3 &amp; 0 &amp; 0 \\
+3 &amp; 5    &amp; 0 &amp; 0 &amp; 0 \\
+2 &amp; 10/4 &amp; 5 &amp; 5 &amp; 0 \\
+1 &amp; 0    &amp; 5/3 &amp; 5/2 &amp; 0 \\
+\end{array}\]</span></p>
+</section>
+<section id="log-scaling" class="level2">
+<h2 class="anchored" data-anchor-id="log-scaling">Log scaling</h2>
+<p>Notice that in the example, the word <code>terrific</code>’s TFIDF score is <span class="math inline">\(5\times\)</span> higher than its count. If we had <span class="math inline">\(N=1000\)</span> documents, and the word <code>terrific</code> only appeared <em>once</em> in <em>one document</em>, then IDF[<code>terrific</code>] would be <span class="math inline">\(1000\)</span> even though its count is just <span class="math inline">\(1\)</span>!</p>
+<p>This is out of proportion. We want to scale up infrequent words, but not so much that they drown out all the other information.</p>
+<p>The solution is to use logarithms. Instead of using the raw frequencies for TF and IDF, we log scale them. Here are the new definitions.</p>
+<p>The raw counts are the numbers in the bag-of-words matrix.</p>
+<p><span class="math display">\[count[d,t] = \text{number of times term $t$ appears in document $d$}\]</span></p>
+<p>The term frequency is now 1 plus the log of the count. <span class="math display">\[TF[d,t] = 1 + \log_{10}(count[d,t])\]</span> The document frequency is the number of documents a term occurs in, just as before. <span class="math display">\[DF[t] = \text{number of documents term $t$ occurs in}\]</span> The inverse document frequency is now the log of the old document frequency (<span class="math inline">\(N\)</span> over <span class="math inline">\(DF[t]\)</span>]). <span class="math display">\[IDF[t] = \log_{10}\left(\frac{N}{DF[t]}\right)\]</span></p>
+</section>
+<section id="for-next-time" class="level2">
+<h2 class="anchored" data-anchor-id="for-next-time">For next time</h2>
+<p>Next time we’ll see a worked-out example of TFIDF with log-scaling. We’ll also start using Python to calculate the model outputs.</p>
 
 
 </section>
