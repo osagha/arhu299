@@ -1,0 +1,60 @@
+# Homework 2
+
+This homework has a by-hand component and a Python component. For the by-hand component, you can turn in a scan or a typed solution. For the Python component, turn in a `.ipynb` file.
+
+## Cross-entropy loss
+
+Take the predictions $\hat y$ from Homework 1 and calculate the cross-entropy loss with respect to the true classes $y$.
+
+## Tf-idf by hand
+
+Make up 5 short documents and construct the tf-idf matrix by hand for these 5 documents. Steps: 
+1. *First* make up your data.
+2. Make the bag-of-words (document-term) matrix by counting the words in each document.
+3. Then calculate the document frequency and inverse document frequency of each word.
+4. Then divide each column by its IDF.
+
+Use the version **without log-scaling**:
+
+$$TF[d,t] = count(d,t) \,\,\,\,\,\,\,\,\, IDF[t] = \frac{N}{DF[t]}$$
+Show your work at each step!
+
+Which words are the most discriminative words? (Meaning, which words appear in the fewest documents, and therefore provide the most information?)
+
+## Python warmup
+
+
+### Part 1
+
+Define the sigmoid function in Python. Use `np.exp` from the `numpy` library.
+
+Write a function that takes a **single string**, splits it up on the spaces, and returns a **set** containing all the unique words. (Hint: Use the `.split()` method. You can turn a list `x` into a set using `set(x)`.)
+
+Write a function that takes a **list of strings** and returns a set containing all the unique words for *all* the strings together. (This is the vocabulary construction step.) (Hint: You can use the previous function to help you.)
+
+### Part 2
+
+
+Write a function that takes a **list of strings** and returns the bag-of-words matrix as a PyTorch tensor. (Hint: The numbers in the tensor are word counts. This is a multi-step process. Use the functions you wrote in Part 1 to help you.)
+
+Write a function that takes a list of shapes and returns a list of randomly generated PyTorch tensors, where each tensor's shape comes from the input list. (Hint: Each shape is a tuple of ints, so the input is a list of tuples of ints. Use `torch.rand(...)`.)
+
+## Tf-idf in Python
+
+**Write your own code!** Do not just copy code from the lecture notes or from the internet.
+
+If you are serious about learning this stuff, you need to build muscle memory for writing code, just like you need muscle memory for playing the piano.
+
+### Part 1
+
+Write a function that takes a bag-of-words matrix and returns a row vector ($1\times V$) containing the document frequencies for each word.
+
+Write a function that takes a bag-of-words matrix and returns the tf-idf matrix. (Hint: The function needs to get the DF and IDF, and then multiply the IDF through the bag-of-words matrix.)
+
+Write a function that takes an $N\times V$ matrix $x$ and a $V\times 1$ weight vector $w$, and a bias $b$, and returns the model predictions. (Hint: You need to calculate $z = xw + b$, and then return the model predictions $\hat y = \sigma(z)$.)
+
+### Part 2
+
+Write a function that takes $y$ (an $N \times 1$ column vector of true labels) and $\hat y$ (an  $N\times 1$ column vector of predictions) and calculates the cross-entropy loss. Test it using randomly generated arrays.
+
+Write a function that takes a number $V$ (the vocab size) and generates 5 random $V \times 1$ column vectors of weights. (Use a loop.) Have it return the vectors in a tuple.
