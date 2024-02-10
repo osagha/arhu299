@@ -105,6 +105,55 @@
     "text": "Read the lecture notes for Day 2 carefully, then do all of the following by hand.\n\nWrite down the weights and biases for that model.\nMake up five short movie reviews and count up their features (word count, positive word count, negative word count). Make sure you write down which words you consider positive and which words you consider negative!\nWrite down the \\(5 \\times 3\\) matrix \\(x\\) for your encoded data and a \\(5 \\times 1\\) column vector \\(y\\) for the true labels.\nUsing your own data matrix \\(x\\), along with the weights and biases from the Day 2 lecture notes, calculate the \\(z = xw + b\\).\nThen, calculate the model predictions \\(\\hat y = \\sigma(z)\\). (You can use a calculator for the sigmoid part.)\nCalculate the difference \\(y - \\hat y\\).\nHow did the model do on your data?\nCan you change the bias or the weights to improve the performance?"
   },
   {
+    "objectID": "pages/homework/homework3.html",
+    "href": "pages/homework/homework3.html",
+    "title": "ARHU299",
+    "section": "",
+    "text": "Write your own code! Do not just copy code from the lecture notes or from the internet.\nYou may look at online resources for help. But write everything yourself.\nIf you are serious about learning this stuff, you need to build muscle memory for writing code, just like you need muscle memory for playing the piano.\n\n\nWrite a function that takes a bag-of-words matrix and returns a row vector (\\(1\\times V\\)) containing the document frequencies for each word.\nWrite a function that takes a bag-of-words matrix and returns the tf-idf matrix. (Hint: The function needs to get the DF and IDF, and then multiply the IDF through the bag-of-words matrix.)\nWrite a function that takes an \\(N\\times V\\) matrix \\(x\\) and a \\(V\\times 1\\) weight vector \\(w\\), and a bias \\(b\\), and returns the model predictions. (Hint: You need to calculate \\(z = xw + b\\), and then return the model predictions \\(\\hat y = \\sigma(z)\\).)\n\n\n\nWrite a function that takes \\(y\\) (an \\(N \\times 1\\) column vector of true labels) and \\(\\hat y\\) (an \\(N\\times 1\\) column vector of predictions) and calculates the cross-entropy loss. Test it using randomly generated arrays.\nWrite a function that takes a number \\(V\\) (the vocab size) and generates 5 random \\(V \\times 1\\) column vectors of weights. (Use a loop.) Have it return the vectors in a tuple."
+  },
+  {
+    "objectID": "pages/homework/homework3.html#tf-idf-in-python",
+    "href": "pages/homework/homework3.html#tf-idf-in-python",
+    "title": "ARHU299",
+    "section": "",
+    "text": "Write your own code! Do not just copy code from the lecture notes or from the internet.\nYou may look at online resources for help. But write everything yourself.\nIf you are serious about learning this stuff, you need to build muscle memory for writing code, just like you need muscle memory for playing the piano.\n\n\nWrite a function that takes a bag-of-words matrix and returns a row vector (\\(1\\times V\\)) containing the document frequencies for each word.\nWrite a function that takes a bag-of-words matrix and returns the tf-idf matrix. (Hint: The function needs to get the DF and IDF, and then multiply the IDF through the bag-of-words matrix.)\nWrite a function that takes an \\(N\\times V\\) matrix \\(x\\) and a \\(V\\times 1\\) weight vector \\(w\\), and a bias \\(b\\), and returns the model predictions. (Hint: You need to calculate \\(z = xw + b\\), and then return the model predictions \\(\\hat y = \\sigma(z)\\).)\n\n\n\nWrite a function that takes \\(y\\) (an \\(N \\times 1\\) column vector of true labels) and \\(\\hat y\\) (an \\(N\\times 1\\) column vector of predictions) and calculates the cross-entropy loss. Test it using randomly generated arrays.\nWrite a function that takes a number \\(V\\) (the vocab size) and generates 5 random \\(V \\times 1\\) column vectors of weights. (Use a loop.) Have it return the vectors in a tuple."
+  },
+  {
+    "objectID": "pages/resources.html",
+    "href": "pages/resources.html",
+    "title": "Resources",
+    "section": "",
+    "text": "I’ll be adding resources here throughout the semester.\n\n\n\n\nA tried-and-true standard textbook for computational linguistics and NLP. The book’s website includes slides too, which are great for a quick reference. Accompanying Youtube lectures can be found here.\n\n\n\nA high quality, detailed, and somewhat technical introduction to NLP.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA brilliant visual introduction to deep learning by 3blue1brown (Grant Sanderson). See also his interactive courses on neural networks, linear algebra, and calculus.\n\n\n\n\n\n\nA Stanford NLP course by Dan Jurafsky, based on the textbook Speech and Language Processing linked above. More accessible than the other courses listed below.\n\n\n\nA Stanford course by Christopher Manning, free on Youtube. This is aimed at Computer Science majors, so it may be more accessible after you have already learned the basics in this course.\n\n\n\nA UC Berkeley course on computer vision, free on Youtube. Quite technical, and best approached after this class."
+  },
+  {
+    "objectID": "pages/resources.html#textbooks",
+    "href": "pages/resources.html#textbooks",
+    "title": "Resources",
+    "section": "",
+    "text": "A tried-and-true standard textbook for computational linguistics and NLP. The book’s website includes slides too, which are great for a quick reference. Accompanying Youtube lectures can be found here.\n\n\n\nA high quality, detailed, and somewhat technical introduction to NLP."
+  },
+  {
+    "objectID": "pages/resources.html#videos",
+    "href": "pages/resources.html#videos",
+    "title": "Resources",
+    "section": "",
+    "text": "A brilliant visual introduction to deep learning by 3blue1brown (Grant Sanderson). See also his interactive courses on neural networks, linear algebra, and calculus."
+  },
+  {
+    "objectID": "pages/resources.html#full-courses",
+    "href": "pages/resources.html#full-courses",
+    "title": "Resources",
+    "section": "",
+    "text": "A Stanford NLP course by Dan Jurafsky, based on the textbook Speech and Language Processing linked above. More accessible than the other courses listed below.\n\n\n\nA Stanford course by Christopher Manning, free on Youtube. This is aimed at Computer Science majors, so it may be more accessible after you have already learned the basics in this course.\n\n\n\nA UC Berkeley course on computer vision, free on Youtube. Quite technical, and best approached after this class."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ARHU299",
+    "section": "",
+    "text": "This is the homepage for ARHU299: Machine Learning in Language and Art at the University of Maryland, College Park.\nPlease see the syllabus for more info."
+  },
+  {
     "objectID": "pages/syllabus.html",
     "href": "pages/syllabus.html",
     "title": "ARHU299 Syllabus",
@@ -189,74 +238,39 @@
     "text": "Students with disabilities are very welcome in this class. If you require accommodations, please contact me as soon as possible. For more information about disability accommodations at UMD, please see the ADS webpage."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ARHU299",
-    "section": "",
-    "text": "This is the homepage for ARHU299: Machine Learning in Language and Art at the University of Maryland, College Park.\nPlease see the syllabus for more info."
-  },
-  {
-    "objectID": "pages/resources.html",
-    "href": "pages/resources.html",
-    "title": "Resources",
-    "section": "",
-    "text": "I’ll be adding resources here throughout the semester.\n\n\n\n\nA tried-and-true standard textbook for computational linguistics and NLP. The book’s website includes slides too, which are great for a quick reference. Accompanying Youtube lectures can be found here.\n\n\n\nA high quality, detailed, and somewhat technical introduction to NLP.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA brilliant visual introduction to deep learning by 3blue1brown (Grant Sanderson). See also his interactive courses on neural networks, linear algebra, and calculus.\n\n\n\n\n\n\nA Stanford NLP course by Dan Jurafsky, based on the textbook Speech and Language Processing linked above. More accessible than the other courses listed below.\n\n\n\nA Stanford course by Christopher Manning, free on Youtube. This is aimed at Computer Science majors, so it may be more accessible after you have already learned the basics in this course.\n\n\n\nA UC Berkeley course on computer vision, free on Youtube. Quite technical, and best approached after this class."
-  },
-  {
-    "objectID": "pages/resources.html#textbooks",
-    "href": "pages/resources.html#textbooks",
-    "title": "Resources",
-    "section": "",
-    "text": "A tried-and-true standard textbook for computational linguistics and NLP. The book’s website includes slides too, which are great for a quick reference. Accompanying Youtube lectures can be found here.\n\n\n\nA high quality, detailed, and somewhat technical introduction to NLP."
-  },
-  {
-    "objectID": "pages/resources.html#videos",
-    "href": "pages/resources.html#videos",
-    "title": "Resources",
-    "section": "",
-    "text": "A brilliant visual introduction to deep learning by 3blue1brown (Grant Sanderson). See also his interactive courses on neural networks, linear algebra, and calculus."
-  },
-  {
-    "objectID": "pages/resources.html#full-courses",
-    "href": "pages/resources.html#full-courses",
-    "title": "Resources",
-    "section": "",
-    "text": "A Stanford NLP course by Dan Jurafsky, based on the textbook Speech and Language Processing linked above. More accessible than the other courses listed below.\n\n\n\nA Stanford course by Christopher Manning, free on Youtube. This is aimed at Computer Science majors, so it may be more accessible after you have already learned the basics in this course.\n\n\n\nA UC Berkeley course on computer vision, free on Youtube. Quite technical, and best approached after this class."
-  },
-  {
     "objectID": "pages/homework/homework2.html",
     "href": "pages/homework/homework2.html",
     "title": "Homework 2",
     "section": "",
-    "text": "This homework has a by-hand component and a Python component. For the by-hand component, you can turn in a scan or a typed solution. For the Python component, turn in a .ipynb file.\n\n\nTake the predictions \\(\\hat y\\) from Homework 1 and calculate the cross-entropy loss with respect to the true classes \\(y\\).\n\n\n\nMake up 5 short documents and construct the tf-idf matrix by hand for these 5 documents. Steps: 1. First make up your data. 2. Make the bag-of-words (document-term) matrix by counting the words in each document. 3. Then calculate the document frequency and inverse document frequency of each word. 4. Then divide each column by its IDF.\nUse the version without log-scaling:\n\\[TF[d,t] = count(d,t) \\,\\,\\,\\,\\,\\,\\,\\,\\, IDF[t] = \\frac{N}{DF[t]}\\] Show your work at each step!\nWhich words are the most discriminative words? (Meaning, which words appear in the fewest documents, and therefore provide the most information?)\n\n\n\n\n\nDefine the sigmoid function in Python. Use np.exp from the numpy library.\nWrite a function that takes a single string, splits it up on the spaces, and returns a set containing all the unique words. (Hint: Use the .split() method. You can turn a list x into a set using set(x).)\nWrite a function that takes a list of strings and returns a set containing all the unique words for all the strings together. (This is the vocabulary construction step.) (Hint: You can use the previous function to help you.)\n\n\n\nWrite a function that takes a list of strings and returns the bag-of-words matrix as a PyTorch tensor. (Hint: The numbers in the tensor are word counts. This is a multi-step process. Use the functions you wrote in Part 1 to help you.)\nWrite a function that takes a list of shapes and returns a list of randomly generated PyTorch tensors, where each tensor’s shape comes from the input list. (Hint: Each shape is a tuple of ints, so the input is a list of tuples of ints. Use torch.rand(...).)\n\n\n\n\nWrite your own code! Do not just copy code from the lecture notes or from the internet.\nIf you are serious about learning this stuff, you need to build muscle memory for writing code, just like you need muscle memory for playing the piano.\n\n\nWrite a function that takes a bag-of-words matrix and returns a row vector (\\(1\\times V\\)) containing the document frequencies for each word.\nWrite a function that takes a bag-of-words matrix and returns the tf-idf matrix. (Hint: The function needs to get the DF and IDF, and then multiply the IDF through the bag-of-words matrix.)\nWrite a function that takes an \\(N\\times V\\) matrix \\(x\\) and a \\(V\\times 1\\) weight vector \\(w\\), and a bias \\(b\\), and returns the model predictions. (Hint: You need to calculate \\(z = xw + b\\), and then return the model predictions \\(\\hat y = \\sigma(z)\\).)\n\n\n\nWrite a function that takes \\(y\\) (an \\(N \\times 1\\) column vector of true labels) and \\(\\hat y\\) (an \\(N\\times 1\\) column vector of predictions) and calculates the cross-entropy loss. Test it using randomly generated arrays.\nWrite a function that takes a number \\(V\\) (the vocab size) and generates 5 random \\(V \\times 1\\) column vectors of weights. (Use a loop.) Have it return the vectors in a tuple."
+    "text": "This homework has a by-hand component and a Python component. For the by-hand component, you can turn in a scan or a typed solution. For the Python component, turn in a .ipynb file."
   },
   {
     "objectID": "pages/homework/homework2.html#cross-entropy-loss",
     "href": "pages/homework/homework2.html#cross-entropy-loss",
     "title": "Homework 2",
-    "section": "",
-    "text": "Take the predictions \\(\\hat y\\) from Homework 1 and calculate the cross-entropy loss with respect to the true classes \\(y\\)."
+    "section": "Cross-entropy loss",
+    "text": "Cross-entropy loss\nTake the predictions \\(\\hat y\\) from Homework 1 and calculate the cross-entropy loss with respect to the true classes \\(y\\)."
   },
   {
     "objectID": "pages/homework/homework2.html#tf-idf-by-hand",
     "href": "pages/homework/homework2.html#tf-idf-by-hand",
     "title": "Homework 2",
-    "section": "",
-    "text": "Make up 5 short documents and construct the tf-idf matrix by hand for these 5 documents. Steps: 1. First make up your data. 2. Make the bag-of-words (document-term) matrix by counting the words in each document. 3. Then calculate the document frequency and inverse document frequency of each word. 4. Then divide each column by its IDF.\nUse the version without log-scaling:\n\\[TF[d,t] = count(d,t) \\,\\,\\,\\,\\,\\,\\,\\,\\, IDF[t] = \\frac{N}{DF[t]}\\] Show your work at each step!\nWhich words are the most discriminative words? (Meaning, which words appear in the fewest documents, and therefore provide the most information?)"
+    "section": "Tf-idf by hand",
+    "text": "Tf-idf by hand\nMake up 5 short documents and construct the tf-idf matrix by hand for these 5 documents. Steps: 1. First make up your data. 2. Make the bag-of-words (document-term) matrix by counting the words in each document. 3. Then calculate the document frequency and inverse document frequency of each word. 4. Then divide each column by its IDF.\nUse the version without log-scaling:\n\\[TF[d,t] = count(d,t) \\,\\,\\,\\,\\,\\,\\,\\,\\, IDF[t] = \\frac{N}{DF[t]}\\] Show your work at each step!\nWhich words are the most discriminative words? (Meaning, which words appear in the fewest documents, and therefore provide the most information?)"
   },
   {
     "objectID": "pages/homework/homework2.html#python-warmup",
     "href": "pages/homework/homework2.html#python-warmup",
     "title": "Homework 2",
-    "section": "",
-    "text": "Define the sigmoid function in Python. Use np.exp from the numpy library.\nWrite a function that takes a single string, splits it up on the spaces, and returns a set containing all the unique words. (Hint: Use the .split() method. You can turn a list x into a set using set(x).)\nWrite a function that takes a list of strings and returns a set containing all the unique words for all the strings together. (This is the vocabulary construction step.) (Hint: You can use the previous function to help you.)\n\n\n\nWrite a function that takes a list of strings and returns the bag-of-words matrix as a PyTorch tensor. (Hint: The numbers in the tensor are word counts. This is a multi-step process. Use the functions you wrote in Part 1 to help you.)\nWrite a function that takes a list of shapes and returns a list of randomly generated PyTorch tensors, where each tensor’s shape comes from the input list. (Hint: Each shape is a tuple of ints, so the input is a list of tuples of ints. Use torch.rand(...).)"
+    "section": "Python warmup",
+    "text": "Python warmup\n\nPart 1\nDefine the sigmoid function in Python. Use np.exp from the numpy library.\n\n# np is the standard abbreviation for numpy\nimport numpy as np\n\ndef sigmoid(z: float) -&gt; float:\n    # your code here...\n    return # ...\n\nWrite a function that takes a single string, splits it up on the spaces, and returns a set containing all the unique words. (Hint: Use the .split() method. You can turn a list x into a set using set(x).)\n\ndef split_into_set(string: str) -&gt; set[str]:\n    # your code here...\n    return # ...\n\n# Use this to test your function\ntest_input = 'great movie'\ntest_output = set(['great', 'movie'])\nif split_into_set(test_input) == test_output:\n    print('Test passed.')\nelse:\n    print('Test failed.')\n\nTest failed.\n\n\nWrite a function that takes a list of strings and returns a set containing all the unique words for all the strings together. (This is the vocabulary construction step.) (Hint: You can use the previous function to help you.)\n\ndef get_word_set(list_of_strs: list[str]) -&gt; set[str]:\n    # your code here...\n    return # ...\n\n# Use this to test your function\ntest_input = ['great movie', 'terrible movie']\ntest_output = set(['great', 'terrible', 'movie'])\nif get_word_set(test_input) == test_output:\n    print('Test passed.')\nelse:\n    print('Test failed.')\n\nTest failed.\n\n\nWrite a function that takes a single string and returns a dictionary whose keys are the unique words in the string, and whose values are the word counts. (Hint: use an if-else pattern inside a for-loop.)\n\ndef get_wc(string: str) -&gt; dict[str, int]:\n    # your code here...\n    return # ...\n\n# Use this to test your function\ntest_input = 'great movie awesome movie'\ntest_output = {'great': 1, 'awesome': 1, 'movie': 2}\nif get_wc(test_input) == test_output:\n    print('Test passed.')\nelse:\n    print('Test failed.')\n\nTest failed.\n\n\nWrite a function that takes a list of strings and returns a dictionary whose keys are the unique words, and whose values are the word counts.\n\ndef get_wcs_from_list(list_of_strs: list[str]) -&gt; dict[str, int]:\n    # your code here...\n    return # ...\n\n# Use this to test your function\ntest_input = ['great movie', 'terrible movie']\ntest_output = {'great': 1, 'terrible': 1, 'movie': 2}\nif get_wcs_from_list(test_input) == test_output:\n    print('Test passed.')\nelse:\n    print('Test failed.')\n\nTest failed.\n\n\n\n\nPart 2\nWrite a function that takes a list of shapes and returns a list of randomly generated PyTorch tensors, where each tensor’s shape comes from the input list. (Hint: Each shape is a tuple of ints, so the input is a list of tuples of ints. Use torch.rand(...).)\n\nimport torch\n\ndef gen_tensors(shapes : list[tuple[int, int]]) -&gt; list[torch.Tensor]:\n    # your code here...\n    return # ...\n\n# check your output\ntest_input = [(1,1), (2,3), (5,4)]\nprint(gen_tensors(test_input))\n\nNone\n\n\nWrite a function that takes a list of strings and returns the bag-of-words matrix as a PyTorch tensor. (Hint: The numbers in the tensor are word counts. This is a multi-step process. Use the functions you wrote in Part 1 to help you.)\n\nimport torch\n\ndef get_bow_matrix(list_of_strs: list[str]) -&gt; torch.Tensor:\n    # your code here ...\n    return # ..."
   },
   {
-    "objectID": "pages/homework/homework2.html#tf-idf-in-python",
-    "href": "pages/homework/homework2.html#tf-idf-in-python",
+    "objectID": "pages/homework/homework2.html#next-time",
+    "href": "pages/homework/homework2.html#next-time",
     "title": "Homework 2",
-    "section": "",
-    "text": "Write your own code! Do not just copy code from the lecture notes or from the internet.\nIf you are serious about learning this stuff, you need to build muscle memory for writing code, just like you need muscle memory for playing the piano.\n\n\nWrite a function that takes a bag-of-words matrix and returns a row vector (\\(1\\times V\\)) containing the document frequencies for each word.\nWrite a function that takes a bag-of-words matrix and returns the tf-idf matrix. (Hint: The function needs to get the DF and IDF, and then multiply the IDF through the bag-of-words matrix.)\nWrite a function that takes an \\(N\\times V\\) matrix \\(x\\) and a \\(V\\times 1\\) weight vector \\(w\\), and a bias \\(b\\), and returns the model predictions. (Hint: You need to calculate \\(z = xw + b\\), and then return the model predictions \\(\\hat y = \\sigma(z)\\).)\n\n\n\nWrite a function that takes \\(y\\) (an \\(N \\times 1\\) column vector of true labels) and \\(\\hat y\\) (an \\(N\\times 1\\) column vector of predictions) and calculates the cross-entropy loss. Test it using randomly generated arrays.\nWrite a function that takes a number \\(V\\) (the vocab size) and generates 5 random \\(V \\times 1\\) column vectors of weights. (Use a loop.) Have it return the vectors in a tuple."
+    "section": "Next time",
+    "text": "Next time\nNext homework, we’ll put the pieces together to do TFIDF in Python!"
   },
   {
     "objectID": "pages/homework/index.html",

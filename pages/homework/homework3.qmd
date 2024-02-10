@@ -1,0 +1,22 @@
+
+## Tf-idf in Python
+
+**Write your own code!** Do not just copy code from the lecture notes or from the internet. 
+
+You may look at online resources for help. But write everything yourself.
+
+If you are serious about learning this stuff, you need to build muscle memory for writing code, just like you need muscle memory for playing the piano.
+
+### Part 1
+
+Write a function that takes a bag-of-words matrix and returns a row vector ($1\times V$) containing the document frequencies for each word.
+
+Write a function that takes a bag-of-words matrix and returns the tf-idf matrix. (Hint: The function needs to get the DF and IDF, and then multiply the IDF through the bag-of-words matrix.)
+
+Write a function that takes an $N\times V$ matrix $x$ and a $V\times 1$ weight vector $w$, and a bias $b$, and returns the model predictions. (Hint: You need to calculate $z = xw + b$, and then return the model predictions $\hat y = \sigma(z)$.)
+
+### Part 2
+
+Write a function that takes $y$ (an $N \times 1$ column vector of true labels) and $\hat y$ (an  $N\times 1$ column vector of predictions) and calculates the cross-entropy loss. Test it using randomly generated arrays.
+
+Write a function that takes a number $V$ (the vocab size) and generates 5 random $V \times 1$ column vectors of weights. (Use a loop.) Have it return the vectors in a tuple.
