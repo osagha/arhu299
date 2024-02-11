@@ -2,9 +2,6 @@
 
 This homework has a by-hand component and a Python component. For the by-hand component, you can turn in a scan or a typed solution. For the Python component, turn in a `.ipynb` file.
 
-## Cross-entropy loss
-
-Take the predictions $\hat y$ from Homework 1 and calculate the cross-entropy loss with respect to the true classes $y$.
 
 ## Tf-idf by hand
 
@@ -127,6 +124,13 @@ def get_bow_matrix(list_of_strs: list[str]) -> torch.Tensor:
     # your code here ...
     return # ...
 
+# check your output here
+test_input = [
+    'great movie',
+    'what crap',
+    'what a great movie',
+]
+print(get_bow_matrix(test_input))
 
 ```
 

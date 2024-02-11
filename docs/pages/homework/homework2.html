@@ -152,8 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#cross-entropy-loss" id="toc-cross-entropy-loss" class="nav-link active" data-scroll-target="#cross-entropy-loss">Cross-entropy loss</a></li>
-  <li><a href="#tf-idf-by-hand" id="toc-tf-idf-by-hand" class="nav-link" data-scroll-target="#tf-idf-by-hand">Tf-idf by hand</a></li>
+  <li><a href="#tf-idf-by-hand" id="toc-tf-idf-by-hand" class="nav-link active" data-scroll-target="#tf-idf-by-hand">Tf-idf by hand</a></li>
   <li><a href="#python-warmup" id="toc-python-warmup" class="nav-link" data-scroll-target="#python-warmup">Python warmup</a>
   <ul class="collapse">
   <li><a href="#part-1" id="toc-part-1" class="nav-link" data-scroll-target="#part-1">Part 1</a></li>
@@ -184,10 +183,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>This homework has a by-hand component and a Python component. For the by-hand component, you can turn in a scan or a typed solution. For the Python component, turn in a <code>.ipynb</code> file.</p>
-<section id="cross-entropy-loss" class="level2">
-<h2 class="anchored" data-anchor-id="cross-entropy-loss">Cross-entropy loss</h2>
-<p>Take the predictions <span class="math inline">\(\hat y\)</span> from Homework 1 and calculate the cross-entropy loss with respect to the true classes <span class="math inline">\(y\)</span>.</p>
-</section>
 <section id="tf-idf-by-hand" class="level2">
 <h2 class="anchored" data-anchor-id="tf-idf-by-hand">Tf-idf by hand</h2>
 <p>Make up 5 short documents and construct the tf-idf matrix by hand for these 5 documents. Steps: 1. <em>First</em> make up your data. 2. Make the bag-of-words (document-term) matrix by counting the words in each document. 3. Then calculate the document frequency and inverse document frequency of each word. 4. Then divide each column by its IDF.</p>
@@ -300,7 +295,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_bow_matrix(list_of_strs: <span class="bu">list</span>[<span class="bu">str</span>]) <span class="op">-&gt;</span> torch.Tensor:</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># your code here ...</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="co"># ...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="co"># ...</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># check your output here</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>test_input <span class="op">=</span> [</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'great movie'</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'what crap'</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'what a great movie'</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(get_bow_matrix(test_input))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>None</code></pre>
+</div>
 </div>
 </section>
 </section>
