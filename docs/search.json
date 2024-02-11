@@ -46,7 +46,7 @@
     "href": "pages/lecturenotes/index.html",
     "title": "Lecture Notes",
     "section": "",
-    "text": "Lecture Notes\n\nDay 1: Intro, Text Encoding, Features, Classification\n\n\nDay 2: Binary classification with hand-crafted features\n\n\nDay 3: Learning bag-of-words features\n\n\nDay 4: TFIDF encoding, part 1\n\n\n2/15 - Day 5 - Notebook 0: Intro to Python"
+    "text": "Lecture Notes\n\nDay 1: Intro, Text Encoding, Features, Classification\n\n\nDay 2: Binary classification with hand-crafted features\n\n\nDay 3: Learning bag-of-words features\n\n\nDay 4: TFIDF encoding, part 1\n\n\n2/8 - Day 5 - Notebook 0: Intro to Python"
   },
   {
     "objectID": "pages/lecturenotes/day1.html",
