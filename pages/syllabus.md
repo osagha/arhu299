@@ -7,7 +7,11 @@ Instructor: Omar Agha (oagha@umd.edu)
 
 TA: Utku Türk (utkuturk@umd.edu)
 
-Office hours: TBD (please fill out the When2Meet [here](https://www.when2meet.com/?23308094-968mf))
+Office hours: 
+
+Omar Agha: Monday 3-4pm in MMH 3416A (outer door is locked; email Omar to be let in)
+
+Utku Türk: Wednesday 4-5pm in MMH 1407C (outer door is locked; email Utku to be let in)
 
 ## Course Summary
 In this course, you will learn how machine learning models read and write text, classify images, and more. This requires understanding some basic elements of linear algebra (vectors and matrices), calculus (the chain rule for derivatives), Python programming, and basic statistics. If you have not seen any of this before, you will learn the relevant tools along the way, in the context of solving applied problems, and with the aid of software that performs complex calculations for you.
