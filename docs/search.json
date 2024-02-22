@@ -46,7 +46,7 @@
     "href": "pages/lecturenotes/index.html",
     "title": "Lecture Notes",
     "section": "",
-    "text": "Lecture Notes\n\nDay 1: Intro, Text Encoding, Features, Classification\n\n\nDay 2: Binary classification with hand-crafted features\n\n\nDay 3: Learning bag-of-words features\n\n\nDay 4: TFIDF encoding, part 1\n\n\n2/8 - Day 5 - Notebook 0: Intro to Python\n\n\n2/13 - Day 6 - Notebook 1 More Python basics\n\n\n2/15 - Day 7 - Notebook 2 Intro to PyTorch"
+    "text": "Lecture Notes\n\nDay 1: Intro, Text Encoding, Features, Classification\n\n\nDay 2: Binary classification with hand-crafted features\n\n\nDay 3: Learning bag-of-words features\n\n\nDay 4: TFIDF encoding, part 1\n\n\n2/8 - Day 5 - Notebook 0: Intro to Python\n\n\n2/13 - Day 6 - Notebook 1 More Python basics\n\n\n2/15 - Day 7 - Notebook 2 Intro to PyTorch\n\n\n2/20 - Day 8 - Notebook 3 - Lecture Notes"
   },
   {
     "objectID": "pages/lecturenotes/day1.html",
@@ -376,5 +376,33 @@
     "title": "Day 3",
     "section": "",
     "text": "This is the simplest possible setup that lets us encode documents using features that are learned from the data (not just hand-crafted). Although bag-of-words representations can work ok in some situations, there are much better ways to learn embeddings.\nNext week, we’ll look an approach that is a step up from this: term frequency-inverse document frequency (tf-idf) encoding.\nLater on, we’ll learn an even better method: pre-trained word embeddings (e.g. word2vec), where a specialized neural network is used to learn vector representations for every word in the vocabulary."
+  },
+  {
+    "objectID": "pages/lecturenotes/day8.html",
+    "href": "pages/lecturenotes/day8.html",
+    "title": "Day 8",
+    "section": "",
+    "text": "Today we introduced multi-class classification.\n\n\n\nSo far, we have been mostly concerned with binary classification. In binary classification, we produce an \\(N \\times 1\\) score vector \\(z\\). \\[z = xw + b\\]Then the sigmoid function is used to get predictions. \\[\\hat y = \\sigma(z)\\] Remember that sigmoid is defined as: \\[\\sigma(z) = \\frac{1}{1 + \\exp(-z)}\\] We end up with a vector of numbers between 0 and 1. The first number is interpreted as the probability that the first document is in class 1, the second number is the probability that the second document is in class 1, and so on.\nThat setup assumes that we have two classes, 0 and 1. What if we have more than two classes? Well, then we will need more than one number for each input document.\n\n\n\nSpecifically, if we have 4 classes, then we need four numbers for each document. The relative sizes of the four numbers will tell us how likely each class is to apply to the document.\nFor example, here is a small subset of the AG News dataset. We have four classes: politics (1), sports (2), science/tech (3), and business (4).\nWe want to build a model that tells us how likely each class is for each document."
+  },
+  {
+    "objectID": "pages/lecturenotes/day8.html#content",
+    "href": "pages/lecturenotes/day8.html#content",
+    "title": "Day 8",
+    "section": "",
+    "text": "Today we introduced multi-class classification."
+  },
+  {
+    "objectID": "pages/lecturenotes/day8.html#binary-classification",
+    "href": "pages/lecturenotes/day8.html#binary-classification",
+    "title": "Day 8",
+    "section": "",
+    "text": "So far, we have been mostly concerned with binary classification. In binary classification, we produce an \\(N \\times 1\\) score vector \\(z\\). \\[z = xw + b\\]Then the sigmoid function is used to get predictions. \\[\\hat y = \\sigma(z)\\] Remember that sigmoid is defined as: \\[\\sigma(z) = \\frac{1}{1 + \\exp(-z)}\\] We end up with a vector of numbers between 0 and 1. The first number is interpreted as the probability that the first document is in class 1, the second number is the probability that the second document is in class 1, and so on.\nThat setup assumes that we have two classes, 0 and 1. What if we have more than two classes? Well, then we will need more than one number for each input document."
+  },
+  {
+    "objectID": "pages/lecturenotes/day8.html#multi-class-classification",
+    "href": "pages/lecturenotes/day8.html#multi-class-classification",
+    "title": "Day 8",
+    "section": "",
+    "text": "Specifically, if we have 4 classes, then we need four numbers for each document. The relative sizes of the four numbers will tell us how likely each class is to apply to the document.\nFor example, here is a small subset of the AG News dataset. We have four classes: politics (1), sports (2), science/tech (3), and business (4).\nWe want to build a model that tells us how likely each class is for each document."
   }
 ]

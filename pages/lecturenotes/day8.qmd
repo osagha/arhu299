@@ -1,0 +1,21 @@
+# Day 8
+
+## Content
+
+Today we introduced multi-class classification.
+
+## Binary classification
+
+So far, we have been mostly concerned with binary classification. In binary classification, we produce an $N \times 1$ score vector $z$. $$z = xw + b$$Then the sigmoid function is used to get predictions. $$\hat y = \sigma(z)$$
+Remember that sigmoid is defined as: $$\sigma(z) = \frac{1}{1 + \exp(-z)}$$
+We end up with a vector of numbers between 0 and 1. The first number is interpreted as the probability that the first document is in class 1, the second number is the probability that the second document is in class 1, and so on.
+
+That setup assumes that we have two classes, 0 and 1. What if we have more than two classes? Well, then we will need more than one number for each input document.
+
+## Multi-class classification
+
+Specifically, if we have 4 classes, then we need four numbers for each document. The relative sizes of the four numbers will tell us how likely each class is to apply to the document.
+
+For example, here is a small subset of the AG News dataset. We have four classes: politics (1), sports (2), science/tech (3), and business (4).
+
+We want to build a model that tells us how likely each class is for each document. 
