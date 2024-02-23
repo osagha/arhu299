@@ -8,16 +8,41 @@ You may look at online resources for help. But write everything yourself.
 
 If you are serious about learning this stuff, you need to build muscle memory for writing code, just like you need muscle memory for playing the piano.
 
+**Instructions:** Do all this in a single colab notebook. Turn it in in `.ipynb` format. *At each step, write down what you are doing.* You can use comments, or you can use text cells in the notebook. But you must say what you are doing at each step. **You will get no credit unless you accurately describe what each part of your code is doing.**
+
+In this homework, you will train a binary classifier using 4 slightly different feature representations. You will compare their performance by looking at the training loss.
+
 ### Part 1
 
-Write a function that takes a bag-of-words matrix and returns a row vector ($1\times V$) containing the document frequencies for each word.
+Download the `.csv` file for the IMDB sentiment analysis data. Load it into Python using Pandas, and extract the text and labels.
 
-Write a function that takes a bag-of-words matrix and returns the tf-idf matrix. (Hint: The function needs to get the DF and IDF, and then multiply the IDF through the bag-of-words matrix.)
-
-Write a function that takes an $N\times V$ matrix $x$ and a $V\times 1$ weight vector $w$, and a bias $b$, and returns the model predictions. (Hint: You need to calculate $z = xw + b$, and then return the model predictions $\hat y = \sigma(z)$.)
+Use the CountVectorizer to create a feature representation. You may want to limit the number of features using `max_features` or `min_df` + `max_df`. Then use `.toarray` and `torch.tensor` to put the feature matrix into Pytorch tensor format.
 
 ### Part 2
 
-Write a function that takes $y$ (an $N \times 1$ column vector of true labels) and $\hat y$ (an  $N\times 1$ column vector of predictions) and calculates the cross-entropy loss. Test it using randomly generated arrays.
+Code up a one-layer linear classifier. Feel free to follow the code from class, but don't just copy it, type everyting yourself (for learning purposes).
 
-Write a function that takes a number $V$ (the vocab size) and generates 5 random $V \times 1$ column vectors of weights. (Use a loop.) Have it return the vectors in a tuple.
+Train the classifier for 100 epochs on your feature matrix. PyTorch will tell you the loss after every 10 epochs. Write down the losses!
+
+### Part 3
+
+Now, take your original feature matrix and normalize the rows: For each row, calculate the mean and standard deviation of the row. Subtract the mean of the row from every number in the row, and divide every number in the row by the standard deviation.
+
+Use the new normalized feature matrix, train the classifier again. Write down the losses. Compare the new losses to the losses from the first run. Did it improve?
+
+
+### Part 4
+
+Now, build a *new* feature matrix using the `TfidfVectorizer` from `sklearn.feature_extraction.text`. This matrix won't be a matrix of counts, it will be a TFIDF matrix like the ones we built by hand in class.
+
+**If you used the parameters `max_features`, `max_df`, or `mid_df` for the count vectorizer, use the same parameter values for the TFIDF vectorizer too!** (Otherwise you can't really compare them.)
+
+Train the same linear classifier on the TFIDF matrix. Write down the losses again. How do these compare to the first two times?
+
+### Part 5
+
+Now take the TFIDF feature matrix from Part 4 and normalize the rows. (Subtract the mean and divide by the standard deviation for each row, like in Part 3.)
+
+Train the model on the normalized TFIDF matrix. How do the losses compare?
+
+
