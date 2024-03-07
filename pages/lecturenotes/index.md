@@ -9,3 +9,5 @@
 ### 2/15 - Day 7 - [Notebook 2](https://colab.research.google.com/drive/10vKFAOS5gdbj1EbgmnPRTPNo1Lm3ycIp?usp=sharing) Intro to PyTorch
 
 ### 2/20 - Day 8 - [Notebook 3](https://colab.research.google.com/drive/12kbg0ly1QhTaDLiojdP_v6OK1O5aSXWN?usp=sharing) - [Lecture Notes](day8.qmd)
+
+### 3/7 - [Notebook 4](https://colab.research.google.com/drive/1EakCmkZNo-4DFe73198vgpkWNyNrqpVj?usp=sharing)
