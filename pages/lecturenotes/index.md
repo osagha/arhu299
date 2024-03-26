@@ -11,3 +11,13 @@
 ### 2/20 - Day 8 - [Notebook 3](https://colab.research.google.com/drive/12kbg0ly1QhTaDLiojdP_v6OK1O5aSXWN?usp=sharing) - [Lecture Notes](day8.qmd)
 
 ### 3/7 - [Notebook 4](https://colab.research.google.com/drive/1EakCmkZNo-4DFe73198vgpkWNyNrqpVj?usp=sharing)
+
+### 3/14 - [Notebook 5](https://colab.research.google.com/drive/1njkg1EulZZG3ohqmAZOYIrFIyN6SciAb?usp=sharing)
+
+### 3/26 - see Notebook 5
+
+### 3/28 - Language Models - see [Chapter 3] of Jurafsky and Martin *Speech and Language Processing*
+
+### 4/2 - Language Models (theory) continued
+
+### 4/4 - n-gram models in Python [Notebook 6](https://colab.research.google.com/drive/15nwt1Bj7F7LktUlf6HYtbtk-QcP5M01i?usp=sharing)
