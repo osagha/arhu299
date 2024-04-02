@@ -16,7 +16,7 @@
 
 ### 3/26 - see Notebook 5
 
-### 3/28 - Language Models - see [Chapter 3] of Jurafsky and Martin *Speech and Language Processing*
+### 3/28 - Language Models - see [Chapter 3](https://web.stanford.edu/~jurafsky/slp3/3.pdf) of Jurafsky and Martin *Speech and Language Processing* ([full book here](https://web.stanford.edu/~jurafsky/slp3/))
 
 ### 4/2 - Language Models (theory) continued
 
