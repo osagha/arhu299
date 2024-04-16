@@ -20,4 +20,6 @@
 
 ### 4/2 - Language Models (theory) continued
 
-### 4/4 - n-gram models in Python [Notebook 6](https://colab.research.google.com/drive/15nwt1Bj7F7LktUlf6HYtbtk-QcP5M01i?usp=sharing)
+### 4/4-11 - n-gram models in Python [Notebook 6](https://colab.research.google.com/drive/15nwt1Bj7F7LktUlf6HYtbtk-QcP5M01i?usp=sharing)
+
+### 4/16 - n-gram models part 2 [Notebook 7](https://colab.research.google.com/drive/1v0aJA1vX5jx0qzJzoQNNYPxuF27LBg4a?usp=sharing)
