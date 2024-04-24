@@ -22,8 +22,12 @@
 
 ### 4/4-11 - n-gram models in Python [Notebook 6](https://colab.research.google.com/drive/15nwt1Bj7F7LktUlf6HYtbtk-QcP5M01i?usp=sharing)
 
-### 4/16-25 - transformer: word embeddings, positional embeddings, and attention - see [Chapter 10](https://web.stanford.edu/~jurafsky/slp3/10.pdf)
+### 4/16-25 - transformers: word embeddings, positional embeddings, and attention - see [Chapter 10](https://web.stanford.edu/~jurafsky/slp3/10.pdf)
 
-More resources on transformer language models:
-3blue1brown videos on transformers: [part 1, on GPT](https://www.youtube.com/watch?v=wjZofJX0v4M), [part 2, on attention](https://www.youtube.com/watch?v=eMlx5fFNoYc)
+##### More resources on transformer language models:
+
+3blue1brown videos on transformers: [part 1, on GPT](https://www.youtube.com/watch?v=wjZofJX0v4M), 
+
+[part 2, on attention](https://www.youtube.com/watch?v=eMlx5fFNoYc)
+
 Andrej Karpathy's [GPT from scratch](https://www.youtube.com/watch?v=kCc8FmEb1nY)

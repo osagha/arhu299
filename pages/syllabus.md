@@ -111,9 +111,9 @@ You don't need to turn in any working code. (You are welcome to do so, and you w
 ### Important Dates
 Before Mar 14, please schedule a meeting with me to talk through project ideas.
 
-* Mar 14: Turn in one paragraph on your project proposal. If you have multiple ideas, do a short paragraph for each.
-* Apr 11: Turn in a half page, more fleshed out version. Start to include some details about technologies, challenges, and/or social impact. (Worth 5% out of the full 20%.)
-* May 7: Final due date for project proposal.
+* **Mar 14**: Turn in one paragraph on your project proposal. If you have multiple ideas, do a short paragraph for each.
+* **Apr 18**: Turn in a half page, more fleshed out version. Start to include some details about technologies, challenges, and/or social impact. (Worth 5% out of the full 20%.)
+* **May 13**: Final due date for project proposal.
 
 ## How to Succeed in This Class
 
