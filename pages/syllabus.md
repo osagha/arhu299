@@ -1,31 +1,27 @@
 # ARHU299 Syllabus
 Syllabus for ARHU299: Machine Learning in Language and Art at the University of Maryland, College Park.
 
-Last updated January 24, 2024.
+Last updated August 27, 2024.
 
 Instructor: Omar Agha (oagha@umd.edu)
 
-TA: Utku Türk (utkuturk@umd.edu)
+TA: Sathvik Nair (sathvik@umd.edu)
 
-Office hours: 
-
-Omar Agha: Monday 3-4pm in MMH 3416A (outer door is locked; email Omar to be let in)
-
-Utku Türk: Wednesday 4-5pm in MMH 1407C (outer door is locked; email Utku to be let in)
+Office hours: TBD
 
 ## Course Summary
 In this course, you will learn how machine learning models read and write text, classify images, and more. This requires understanding some basic elements of linear algebra (vectors and matrices), calculus (the chain rule for derivatives), Python programming, and basic statistics. If you have not seen any of this before, you will learn the relevant tools along the way, in the context of solving applied problems, and with the aid of software that performs complex calculations for you.
 
-This is a fast-paced class. There will be homework every week, and frequent in-class assignments. You will need to make a serious effort to learn about difficult technical topics. I assume you are here because you want to learn this material, and I will do everything I can to help you succeed.
+This is a fast-paced class. There will be homework roughly every other week, and frequent in-class assignments. You will need to make a serious effort to learn about difficult technical topics. I assume you are here because you want to learn this material, and I will do everything I can to help you succeed.
 
 We will work up from simple models to more complex ones. We will start with the simplest neural network architecture, the perceptron, and apply it to text classification tasks. After that, we will study deeper networks (multi layer perceptrons) that can be used for language modeling (predicting the next word).
 
-By the end of the course, we will cover the basics of transformer models and convolutional neural networks. Transformers are the building blocks of language models like GPT, and convolutional NNs are used for classifying and generating images. Depending on the speed of your progress, we might also have time to discuss more advanced neural network architectures like latent diffusion models, which are behind powerful text-to-image generators like Stable Diffusion and Midjourney.
+By the end of the course, we will cover the basics of transformer models. Transformers are the building blocks of language models like GPT. Depending on the speed of your progress, we might also have time to discuss other neural network architectures like convolutional neural networks.
 
 ## How Deep Will We Go?
 Engineers and scientists who work on these topics usually do years of intense study in math and computer science before reaching proficiency. So it's not realistic for us to go *that* deep in one semester.
 
-Luckily, building simple text and image models (and maybe music generators) does not require as much expertise, only some Python skills and enough curiosity to figure things out on one's own.
+Luckily, building simple text and image models does not require as much expertise, only some Python skills and enough curiosity to figure things out on one's own.
 
 ## Math Skills
 You will learn how to multiply matrices, use probability, and understand simple equations and graphs involving functions like $\sin$, $\cos$, and $\log$. You will see how these concepts are actually applied in real-world problems.
@@ -94,26 +90,26 @@ If you choose to use generative AI to help with solving problems, that's ok, but
 ### Distribution
 * 50% homework
 * 20% quizzes
-* 10% participation (in person and on Discord)
-* 20% project proposal
+* 10% participation
+* 20% final project
 
 ## Project Proposal
-By the last day of class, please submit a 2-3 page project proposal. This can be for a product that you would like to create, or for a research project. In the proposal, please discuss in detail 
+By the end of class, you will submit a 2-3 page project proposal. This can be for a product that you would like to create, or for a research project. In the proposal, please discuss in detail 
 
-1. how you would use the technologies we cover in class, (5%)
+1. how you would use the technologies we cover in class,
 
-2. what you think the most challenging components would be, (5%)
+2. what you think the most challenging components would be,
 
-3. what the likely social impact of the project would be. (5%)
+3. what the likely social impact of the project would be.
 
 You don't need to turn in any working code. (You are welcome to do so, and you won't be graded on the code, only the proposal.)  
 
 ### Important Dates
-Before Mar 14, please schedule a meeting with me to talk through project ideas.
+Before Oct 18, please schedule a meeting with me to talk through project ideas.
 
-* **Mar 14**: Turn in one paragraph on your project proposal. If you have multiple ideas, do a short paragraph for each.
-* **Apr 18**: Turn in a half page, more fleshed out version. Start to include some details about technologies, challenges, and/or social impact. (Worth 5% out of the full 20%.)
-* **May 13**: Final due date for project proposal.
+* **Oct 18**: Turn in one paragraph on your project proposal. If you have multiple ideas, do a short paragraph for each.
+* **Nov 15**: Turn in a half page, more fleshed out version. Start to include some details about technologies, challenges, and/or social impact. (Worth 5% out of the full 20%.)
+* **Dec 6**: Final due date for project proposal.
 
 ## How to Succeed in This Class
 
@@ -128,8 +124,8 @@ If you find yourself struggling to understand something, try re-reading the lect
 I will link to helpful videos and articles in my lecture notes. Don't forget to use them!
 
 ### Group Work
-Group work is highly encouraged. Please try to find a study group early on, and try to meet up for each homework. I'll make a Discord chat for the class to help you all collaborate.
-As a reminder, copying code or prose directly from other students is plagiarism, so please make sure that all submitted work is your own.
+Group work is highly encouraged. Please try to find a study group early on, and try to meet up for each homework.
+As a reminder, please make sure that all submitted work is your own.
 
 ### Food, Sleep, and Exercise
 Taking care of yourself is the foundation for all success in life. Make sure you come to class well-rested, nourished, and ready to learn. (If you need to eat or drink beverages in class, that's fine with me.)
