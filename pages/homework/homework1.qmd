@@ -1,6 +1,6 @@
 # Homework 1
 
-Due Thursday February 8th.
+Due Tuesday September 17th.
 
 Solve each problem **by hand**. You may handwrite or type your solutions. 
 
@@ -23,11 +23,11 @@ $$ A = \left[\begin{array}{ccc} -2 & 3 & 8 \\ 0 & 11 & -3 \\ -2 & 0 & 0 \end{arr
 6. For each product that works, calculate it.
 
 
-## Part 2: More binary classification
+## Part 2: Sentiment analysis case study
 
-Read the lecture notes for Day 2 carefully, then do all of the following by hand. 
+Read the lecture notes for September 5th (09-05) carefully, then do all of the following by hand. 
 
-1. Write down the weights and biases for that model. 
+1. Write down the weights and biases for the model. 
 2. Make up five short movie reviews and count up their features (word count, positive word count, negative word count). **Make sure you write down which words you consider positive and which words you consider negative!**
 3. Write down the $5 \times 3$ matrix $x$ for your encoded data and a $5 \times 1$ column vector $y$ for the true labels.
 4. Using **your own data matrix** $x$, along with the weights and biases from the Day 2 lecture notes, calculate the $z = xw + b$.

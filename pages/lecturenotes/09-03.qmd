@@ -1,0 +1,88 @@
+# 09-03
+
+## What is a neural network, conceptually?
+
+A neural network is a kind of function. It can take inputs in array format, and return outputs in a (possibly different) array format.
+
+Neural networks can take many kinds of inputs, like text, images, or sound files. In each case, the input has to be encoded as an array of numbers.
+
+```{mermaid}
+flowchart LR
+	A(Text) --> Z{Neural network}
+	B(Image) --> Z
+	C(Sound file) --> Z
+	Z --> D("Label (Classification)")
+	Z --> E("Text, Image, Sound (Generation)")
+	
+```
+In the case of classification, the output is a label. In the case of generation, the output could be of many types, including more text, images, or sound.
+
+## What is text?
+
+On a computer, all text is an encoded sequence of characters. A *character* is a symbol like a letter or number, punctuation, spaces/tabs/newlines, or special characters like "?"" or emojis.
+
+Unicode is the global standard for text encoding. It assigns every character to a code point. For example, capital `A` is `U+0041`, lowercase `a` is `U+0061`, and the number `1` is `U+0031`. Unicode covers all symbols in all scripts, plus many other characters. Some other examples are below.
+
+| Symbol | Code point |
+| ---- | ---- |
+| ⽔ | U+2F54 |
+| (Space) | U+0020 |
+| अ | U+0905 |
+| ? | U+003F |
+You can search for any symbol you like [here](https://www.compart.com/en/unicode/) and find its Unicode code point.
+
+Code points are turned into machine-readable representations by particular encoding schemes, which differ in how much memory they use. The most popular is [UTF-8](https://en.wikipedia.org/wiki/UTF-8) (read more about this on the Wiki link).
+
+## Text classification example
+
+Let's take text classification as an example. In class we talked about sentiment analysis, but classification is used for other purposes too, like spam detection or topic modeling.
+```{mermaid}
+flowchart TD
+	A(Text Classification) --- B(Sentiment analysis)
+	A --- C(Spam detection)
+	A --- D(Topic modeling)
+	A --- E(...)
+```
+
+
+In text classification, the input is a string (a sequence of characters). Let's take sentiment analysis as an example.
+
+```{mermaid}
+flowchart LR
+	A("Text string <br> `This movie was great`") --> Z{Neural network}
+	Z --> D("Positive ✓")
+	Z --> E("Negative ✗")
+```
+In sentiment analysis, a model takes in a string and outputs a label, either `positive` or `negative`.
+
+In practice, the model is rarely 100% sure about the label, so it outputs probabilities. For example, if `'This movie was great.'` is the input, the model might output `0.9` for `positive` and `0.1` for `negative`. 
+
+Later on, we'll see how to get our model to output probabilities. For now, let's just think of our model as assigning scores to documents, where a higher score means the document is more positive, and a lower score means the document is more negative.
+
+### Feature representations
+
+Documents (like movie reviews) are just sequences of characters, as far as the computer is concerned. It doesn't know that `dog` is more similar in meaning to `canine` than it is to `philosophy`---all it sees are the characters.
+
+We need to extract meaningful information from these text documents, and put it in a format that the classification algorithm can use. This is called a *feature representation* of a document, and it takes the form of a vector of numbers. These numbers can be thought of as coordinates for points in a high-dimensional space.
+
+No matter how many dimensions a vector space has, we can always calculate the distance between points in the space.
+
+In class, we saw some examples of *features* that might be useful for sentiment analysis: the number of positive words, the number of negative words, and the number of total words (the length of the document).
+
+### Weights
+
+Remember that the goal is to assign each document a sentiment score. Let's call the score $z$. Once we extract a feature representation (a vector $x_0, x_1, x_2,...$) from our document, we need to decide what effect each feature will have on that document's sentiment score $z$. The effect of each feature is captured by a number in our model that we call a *weight*. 
+
+Each feature has its own weight. (Notation: $w_0$ is the weight for feature $x_0$, $w_1$ is the weight for $x_1$, and so on.)
+
+The sentiment score $z$ of a document, which measures how positive the document is, can be summarized by writing $z$ as a linear function of the features, where the weights are the coefficients.
+
+$$z = w_0x_0 + w_1x_1 + w_2x_2 + ...$$
+
+As an example, suppose we use only three features: $x_0$ is the positive word count, $x_1$ is the negative word count, and $x_2$ is the length. Now we set the weights. Let's say that each positive word adds $1$ to the score, each negative word subtracts $1$ from the score, and each word (in the total count) subtracts $1/2$. (There is nothing special about these numbers, it's just an example.)
+
+If we set the weights that way, then we would have $w_0 = 1, w_1 =-1, w_2 = -1/2$. The score for a document would then look like
+
+$$z = x_0 - x_1 - \frac12 x_2$$
+
+Next time, we'll use matrix notation to generalize this idea, and write down a model that can classify multiple documents at once.
