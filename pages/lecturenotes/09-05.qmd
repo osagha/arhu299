@@ -1,19 +1,24 @@
 # 09-05
 
-## Content
-
-Today we built a one-layer sigmoid classifier to classify movie reviews into two classes: `positive` and `negative`.
 
 ## Model setup
 
-The goal was to generate a score $$z = xw + b$$ for each movie review, and tweak the formula behind the scores so that positive reviews have higher scores and negative reviews have lower scores.
+Our goal is to sort movie reviews into two classes, positive and negative. The strategy has been to generate a score $$z = xw + b$$ for each movie review, and tweak the formula behind the scores so that positive reviews have higher scores and negative reviews have lower scores.
 
-The score $z$ can be any real number. But what we actually want is for the model to guess whether the review is positive or negative. To do this, we use the sigmoid function, which squishes the real number line into the interval $(0,1)$. 
+The score $z$ can be any real number. (Meaning, any number on the number line, from negative infinity to positive infinity.) But what we actually want is for the model to guess whether the review is positive or negative. 
+
+To do this, let's assume that 1 means positive and 0 means negative. We want to take our scores, which go from negative to positive infinity, and "squish" them down into the interval (0,1).
+
+To do this, we use the sigmoid function, which does exactly that. In addition to squishing the scores into a bounded interval, sigmoid has the property that $\sigma(0) = \frac12$. When $z$ gets very large in the positive direction, $\sigma(z)$ gets close to $1$, and when $z$ gets large in the negative direction, $\sigma(z)$ gets close to $0$.
 
 $$ \sigma(z) = \frac{1}{1 + \exp(-z)}$$
 
 
-The model's output is $\hat y = \sigma(z)$, a number between 0 and 1, which we can interpret as "the probability that review $x$ was a positive review".
+## From scores to model predictions
+
+Remember that $z$ is a vector of scores, with one score for every document we put in. For example, if we put in $5$ documents, then $x$ will have $5$ rows, and $z$ will also have $5$ rows. Therefore, $z$ would have only $5$ numbers, since it has just one column.
+
+The model's predictions are called $\hat y$, which is pronounced "y hat". We get the predictions by taking our scores and putting them through the sigmoid function, so $\hat y = \sigma(z)$. Each score in $\hat y$ is a number between 0 and 1. We can interpret each of these numbers as the probability that the corresponding review is positive.
 
 NOTE: The symbol $\sigma$ is the greek letter *sigma*. The sigmoid function is also known as the logistic function.
 
@@ -60,13 +65,9 @@ plt.show()
 
 ```
 
-## Hand-crafted features
+## Example
 
-To make text digestible by machine models, we have to encode it using *feature representations*. In class, we discussed the difference between hand-crafted features, which are created by the modeller, and learned features, which are learned from data.
-
-We came up with some fake movie reviews and discussed three hand-crafted features: total word count, count of positive words, and count of negative words.
-
-Each review is encoded as a row of three numbers, representing the word count, the number of positive words, and the number of negative words, respectively. Here are four examples.
+For our example, let's use three features: the total word count of the document, the number of positive words, and the number of negative words. (Note that the order is a bit different from the one we used in class.) Here are four example documents.
 
 ```{mermaid}
 flowchart LR
@@ -85,15 +86,13 @@ To calculate the scores for multiple reviews at once, we use matrix multiplicati
 $$y = \left[\begin{array}{c} 1 \\ 0 \\ 1 \\ 0 \end{array}\right] \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, x = \left[\begin{array}{ccc} 6 & 2 & 0 \\ 3 & 0 & 1 \\ 2 & 1 & 0 \\ 7 & 1 & 1 \end{array}\right]$$
 
 
-Our weights will be a $3 \times 1$ matrix, and our bias will be a single number. I didn't show this in class, but we have to write the bias number 4 times in a column vector, so that it has the same shape as $xw$ ($4 \times 1$).
+Our weights will be a $3 \times 1$ column because we have three features. The bias will be a single number. The bias is repeated 4 times in a column, so that it has the same shape as $xw$ ($4 \times 1$).
 
-Here's an example weight matrix (in this case the weights are a $3 \times 1$ column vector).
+Here's an example weight matrix. Here we are giving weight $-1$ to the total word count (length), weight $2$ to the positive words, and weight $-2$ to the negative words.
 
 $$w = \left[\begin{array}{ccc} -1 \\ 2 \\ -2 \end{array}\right]$$
 
-(In class we made the weight for the word count positive, but if we think that negative reviews have higher word counts, then we should actually make it negative.)
-
-If our bias is $+4$, then we end up with the following $z$ scores.
+Let's make our example bias $4$. Then we end up with the following $z$ scores.
 
 $$z = xw + b = \left[\begin{array}{ccc} 6 & 2 & 0 \\ 3 & 0 & 1 \\ 2 & 1 & 0 \\ 7 & 1 & 1 \end{array}\right] \left[\begin{array}{ccc} -1 \\ 2 \\ -2 \end{array}\right] + \left[\begin{array}{ccc} 4 \\ 4 \\ 4 \\ 4 \end{array}\right]$$
 
@@ -103,7 +102,7 @@ With these weights and biases, we end up with positive $z$ for reviews 1 and 3, 
 
 $$\hat y = \sigma(z) = \sigma\left(\left[\begin{array}{c} 2 \\ -1 \\ 4 \\ -3 \end{array}\right]\right) = \left[\begin{array}{c} \sigma(2) \\ \sigma(-1) \\ \sigma(4) \\ \sigma(-3) \end{array}\right] = \left[\begin{array}{c} 0.88 \\ 0.27 \\ 0.95 \\ 0.05 \end{array}\right]$$
 
-Recall that the true labels were:
+Recall that the true labels for the documents were:
 
 $$y = \left[\begin{array}{c} 1 \\ 0 \\ 1 \\ 0 \end{array}\right]$$
 
@@ -113,6 +112,6 @@ $$y  - \hat y = \left[\begin{array}{c} 1 \\ 0 \\ 1 \\ 0 \end{array}\right] - \le
 
 ## Summing up
 
-We now know how to write down the formulas for one-layer sigmoid classifier and apply it to binary text classification. In the future, we'll look at the softmax function for multi-class classification (where there are more than two output labels).
+We now know how to write down the formulas for one-layer sigmoid classifier and apply it to binary text classification. In the future, we'll look multi-class classification (where there are more than two output labels).
 
 We'll also start to look at *representation learning*, the art of learning features from data (rather than hand-crafting them, like we've done here).

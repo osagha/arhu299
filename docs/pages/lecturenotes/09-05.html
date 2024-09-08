@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ARHU299 – quarto-input3b02e78e</title>
+<title>ARHU299 – quarto-input24dec35b</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -122,9 +122,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#content" id="toc-content" class="nav-link active" data-scroll-target="#content">Content</a></li>
-  <li><a href="#model-setup" id="toc-model-setup" class="nav-link" data-scroll-target="#model-setup">Model setup</a></li>
-  <li><a href="#hand-crafted-features" id="toc-hand-crafted-features" class="nav-link" data-scroll-target="#hand-crafted-features">Hand-crafted features</a></li>
+  <li><a href="#model-setup" id="toc-model-setup" class="nav-link active" data-scroll-target="#model-setup">Model setup</a></li>
+  <li><a href="#from-scores-to-model-predictions" id="toc-from-scores-to-model-predictions" class="nav-link" data-scroll-target="#from-scores-to-model-predictions">From scores to model predictions</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication">Matrix multiplication</a></li>
   <li><a href="#summing-up" id="toc-summing-up" class="nav-link" data-scroll-target="#summing-up">Summing up</a></li>
   </ul>
@@ -150,16 +150,18 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="content" class="level2">
-<h2 class="anchored" data-anchor-id="content">Content</h2>
-<p>Today we built a one-layer sigmoid classifier to classify movie reviews into two classes: <code>positive</code> and <code>negative</code>.</p>
-</section>
 <section id="model-setup" class="level2">
 <h2 class="anchored" data-anchor-id="model-setup">Model setup</h2>
-<p>The goal was to generate a score <span class="math display">\[z = xw + b\]</span> for each movie review, and tweak the formula behind the scores so that positive reviews have higher scores and negative reviews have lower scores.</p>
-<p>The score <span class="math inline">\(z\)</span> can be any real number. But what we actually want is for the model to guess whether the review is positive or negative. To do this, we use the sigmoid function, which squishes the real number line into the interval <span class="math inline">\((0,1)\)</span>.</p>
+<p>Our goal is to sort movie reviews into two classes, positive and negative. The strategy has been to generate a score <span class="math display">\[z = xw + b\]</span> for each movie review, and tweak the formula behind the scores so that positive reviews have higher scores and negative reviews have lower scores.</p>
+<p>The score <span class="math inline">\(z\)</span> can be any real number. (Meaning, any number on the number line, from negative infinity to positive infinity.) But what we actually want is for the model to guess whether the review is positive or negative.</p>
+<p>To do this, let’s assume that 1 means positive and 0 means negative. We want to take our scores, which go from negative to positive infinity, and “squish” them down into the interval (0,1).</p>
+<p>To do this, we use the sigmoid function, which does exactly that. In addition to squishing the scores into a bounded interval, sigmoid has the property that <span class="math inline">\(\sigma(0) = \frac12\)</span>. When <span class="math inline">\(z\)</span> gets very large in the positive direction, <span class="math inline">\(\sigma(z)\)</span> gets close to <span class="math inline">\(1\)</span>, and when <span class="math inline">\(z\)</span> gets large in the negative direction, <span class="math inline">\(\sigma(z)\)</span> gets close to <span class="math inline">\(0\)</span>.</p>
 <p><span class="math display">\[ \sigma(z) = \frac{1}{1 + \exp(-z)}\]</span></p>
-<p>The model’s output is <span class="math inline">\(\hat y = \sigma(z)\)</span>, a number between 0 and 1, which we can interpret as “the probability that review <span class="math inline">\(x\)</span> was a positive review”.</p>
+</section>
+<section id="from-scores-to-model-predictions" class="level2">
+<h2 class="anchored" data-anchor-id="from-scores-to-model-predictions">From scores to model predictions</h2>
+<p>Remember that <span class="math inline">\(z\)</span> is a vector of scores, with one score for every document we put in. For example, if we put in <span class="math inline">\(5\)</span> documents, then <span class="math inline">\(x\)</span> will have <span class="math inline">\(5\)</span> rows, and <span class="math inline">\(z\)</span> will also have <span class="math inline">\(5\)</span> rows. Therefore, <span class="math inline">\(z\)</span> would have only <span class="math inline">\(5\)</span> numbers, since it has just one column.</p>
+<p>The model’s predictions are called <span class="math inline">\(\hat y\)</span>, which is pronounced “y hat”. We get the predictions by taking our scores and putting them through the sigmoid function, so <span class="math inline">\(\hat y = \sigma(z)\)</span>. Each score in <span class="math inline">\(\hat y\)</span> is a number between 0 and 1. We can interpret each of these numbers as the probability that the corresponding review is positive.</p>
 <p>NOTE: The symbol <span class="math inline">\(\sigma\)</span> is the greek letter <em>sigma</em>. The sigmoid function is also known as the logistic function.</p>
 <div class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
@@ -167,11 +169,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="hand-crafted-features" class="level2">
-<h2 class="anchored" data-anchor-id="hand-crafted-features">Hand-crafted features</h2>
-<p>To make text digestible by machine models, we have to encode it using <em>feature representations</em>. In class, we discussed the difference between hand-crafted features, which are created by the modeller, and learned features, which are learned from data.</p>
-<p>We came up with some fake movie reviews and discussed three hand-crafted features: total word count, count of positive words, and count of negative words.</p>
-<p>Each review is encoded as a row of three numbers, representing the word count, the number of positive words, and the number of negative words, respectively. Here are four examples.</p>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>For our example, let’s use three features: the total word count of the document, the number of positive words, and the number of negative words. (Note that the order is a bit different from the one we used in class.) Here are four example documents.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -192,23 +192,22 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="matrix-multiplication">Matrix multiplication</h2>
 <p>To calculate the scores for multiple reviews at once, we use matrix multiplication. Each feature representation is a row of 3 numbers, so if we have 4 reviews in the dataset, then we end up with a <span class="math inline">\(4\times 3\)</span> matrix representing the dataset. <span class="math inline">\(y\)</span> is a vector representing the true labels of each example, 1 for positive and 0 for negative.</p>
 <p><span class="math display">\[y = \left[\begin{array}{c} 1 \\ 0 \\ 1 \\ 0 \end{array}\right] \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, x = \left[\begin{array}{ccc} 6 &amp; 2 &amp; 0 \\ 3 &amp; 0 &amp; 1 \\ 2 &amp; 1 &amp; 0 \\ 7 &amp; 1 &amp; 1 \end{array}\right]\]</span></p>
-<p>Our weights will be a <span class="math inline">\(3 \times 1\)</span> matrix, and our bias will be a single number. I didn’t show this in class, but we have to write the bias number 4 times in a column vector, so that it has the same shape as <span class="math inline">\(xw\)</span> (<span class="math inline">\(4 \times 1\)</span>).</p>
-<p>Here’s an example weight matrix (in this case the weights are a <span class="math inline">\(3 \times 1\)</span> column vector).</p>
+<p>Our weights will be a <span class="math inline">\(3 \times 1\)</span> column because we have three features. The bias will be a single number. The bias is repeated 4 times in a column, so that it has the same shape as <span class="math inline">\(xw\)</span> (<span class="math inline">\(4 \times 1\)</span>).</p>
+<p>Here’s an example weight matrix. Here we are giving weight <span class="math inline">\(-1\)</span> to the total word count (length), weight <span class="math inline">\(2\)</span> to the positive words, and weight <span class="math inline">\(-2\)</span> to the negative words.</p>
 <p><span class="math display">\[w = \left[\begin{array}{ccc} -1 \\ 2 \\ -2 \end{array}\right]\]</span></p>
-<p>(In class we made the weight for the word count positive, but if we think that negative reviews have higher word counts, then we should actually make it negative.)</p>
-<p>If our bias is <span class="math inline">\(+4\)</span>, then we end up with the following <span class="math inline">\(z\)</span> scores.</p>
+<p>Let’s make our example bias <span class="math inline">\(4\)</span>. Then we end up with the following <span class="math inline">\(z\)</span> scores.</p>
 <p><span class="math display">\[z = xw + b = \left[\begin{array}{ccc} 6 &amp; 2 &amp; 0 \\ 3 &amp; 0 &amp; 1 \\ 2 &amp; 1 &amp; 0 \\ 7 &amp; 1 &amp; 1 \end{array}\right] \left[\begin{array}{ccc} -1 \\ 2 \\ -2 \end{array}\right] + \left[\begin{array}{ccc} 4 \\ 4 \\ 4 \\ 4 \end{array}\right]\]</span></p>
 <p><span class="math display">\[= \left[\begin{array}{ccc} 6 \cdot (-1) + 2 \cdot 2 + 0 \cdot (-2) \\ 3 \cdot (-1) + 0 \cdot 2 + 1 \cdot (-2) \\ 2 \cdot (-1) + 1 \cdot 2 + 0 \cdot (-2) \\ 7 \cdot (-1) + 1 \cdot 2 + 1 \cdot (-2) \end{array}\right]  + \left[\begin{array}{ccc} 4 \\ 4 \\ 4 \\ 4 \end{array}\right] = \left[\begin{array}{ccc} -2 \\ -5 \\ 0 \\ -7 \end{array}\right]  + \left[\begin{array}{ccc} 4 \\ 4 \\ 4 \\ 4 \end{array}\right] = \left[\begin{array}{ccc} 2 \\ -1 \\ 4 \\ -3 \end{array}\right]\]</span></p>
 <p>With these weights and biases, we end up with positive <span class="math inline">\(z\)</span> for reviews 1 and 3, and negative <span class="math inline">\(z\)</span> for reviews 2 and 4. The sigmoid <span class="math inline">\(\sigma\)</span> function will turn the positive <span class="math inline">\(z\)</span> scores into probabilities greater than 0.5, and negative z scores into probabilities smaller than 0.5. Sigmoid takes in a single number, so we apply it element-wise (meaning, to each element of the vector).</p>
 <p><span class="math display">\[\hat y = \sigma(z) = \sigma\left(\left[\begin{array}{c} 2 \\ -1 \\ 4 \\ -3 \end{array}\right]\right) = \left[\begin{array}{c} \sigma(2) \\ \sigma(-1) \\ \sigma(4) \\ \sigma(-3) \end{array}\right] = \left[\begin{array}{c} 0.88 \\ 0.27 \\ 0.95 \\ 0.05 \end{array}\right]\]</span></p>
-<p>Recall that the true labels were:</p>
+<p>Recall that the true labels for the documents were:</p>
 <p><span class="math display">\[y = \left[\begin{array}{c} 1 \\ 0 \\ 1 \\ 0 \end{array}\right]\]</span></p>
 <p>We can look at the differences between the true labels <span class="math inline">\(y\)</span> and the predicted labels <span class="math inline">\(\hat y\)</span>. The goal is to approximate the true labels as closely as possible, so the smaller these differences are, the better our model is.</p>
 <p><span class="math display">\[y  - \hat y = \left[\begin{array}{c} 1 \\ 0 \\ 1 \\ 0 \end{array}\right] - \left[\begin{array}{c} 0.88 \\ 0.27 \\ 0.95 \\ 0.05 \end{array}\right] \,\,\,\, = \,\,\,\, \left[\begin{array}{c} 0.12 \\ -0.27 \\ 0.05 \\ -0.05 \end{array}\right]\]</span></p>
 </section>
 <section id="summing-up" class="level2">
 <h2 class="anchored" data-anchor-id="summing-up">Summing up</h2>
-<p>We now know how to write down the formulas for one-layer sigmoid classifier and apply it to binary text classification. In the future, we’ll look at the softmax function for multi-class classification (where there are more than two output labels).</p>
+<p>We now know how to write down the formulas for one-layer sigmoid classifier and apply it to binary text classification. In the future, we’ll look multi-class classification (where there are more than two output labels).</p>
 <p>We’ll also start to look at <em>representation learning</em>, the art of learning features from data (rather than hand-crafting them, like we’ve done here).</p>
 
 
