@@ -1,15 +1,15 @@
-# Day 3
+# 09-17
 
 ## Content
-Today we saw our first example of learned document embeddings, namely the bag-of-words feature representation for documents.
+Previously we were "hand-crafting" features to use for encoding documents. Now, we are starting to learn about more general methods for encoding documents. Our first example is the bag-of-words representation.
 
 ## Learning features from data
 
 In our first version of the binary classifier, we used simple hand-crafted features to encode documents. Each document (movie review) was encoded as a row of three numbers: total word count, positive word count, and negative word count.
 
-This is usually not enough. In most cases, it is better to learn a feature representation from the data itself. Today we saw the most basic possible way to do this with text data: bag-of-words encoding.
+In most cases, it is better to extract a feature representation from the data itself. Today we saw the most basic possible way to do this with text data: bag-of-words encoding.
 
-A bag-of-words encoding for a document is a vector of counts. To create bag-of-words encodings, we have to start by finding each unique word in the dataset and giving it its own column. 
+A bag-of-words encoding for a document is a vector of word counts. To create bag-of-words encodings, we have to start by finding each unique word in the dataset and giving it its own column. 
 
 ## Bag of words example
 
