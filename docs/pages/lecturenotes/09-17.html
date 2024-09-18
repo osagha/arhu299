@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ARHU299 – day3</title>
+<title>ARHU299 – quarto-input6ad54c97</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#day-3" id="toc-day-3" class="nav-link active" data-scroll-target="#day-3">Day 3</a>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">09-17</a>
   <ul class="collapse">
   <li><a href="#content" id="toc-content" class="nav-link" data-scroll-target="#content">Content</a></li>
   <li><a href="#learning-features-from-data" id="toc-learning-features-from-data" class="nav-link" data-scroll-target="#learning-features-from-data">Learning features from data</a></li>
@@ -134,17 +134,17 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="day-3" class="level1">
-<h1>Day 3</h1>
+<section id="section" class="level1">
+<h1>09-17</h1>
 <section id="content" class="level2">
 <h2 class="anchored" data-anchor-id="content">Content</h2>
-<p>Today we saw our first example of learned document embeddings, namely the bag-of-words feature representation for documents.</p>
+<p>Previously we were “hand-crafting” features to use for encoding documents. Now, we are starting to learn about more general methods for encoding documents. Our first example is the bag-of-words representation.</p>
 </section>
 <section id="learning-features-from-data" class="level2">
 <h2 class="anchored" data-anchor-id="learning-features-from-data">Learning features from data</h2>
 <p>In our first version of the binary classifier, we used simple hand-crafted features to encode documents. Each document (movie review) was encoded as a row of three numbers: total word count, positive word count, and negative word count.</p>
-<p>This is usually not enough. In most cases, it is better to learn a feature representation from the data itself. Today we saw the most basic possible way to do this with text data: bag-of-words encoding.</p>
-<p>A bag-of-words encoding for a document is a vector of counts. To create bag-of-words encodings, we have to start by finding each unique word in the dataset and giving it its own column.</p>
+<p>In most cases, it is better to extract a feature representation from the data itself. Today we saw the most basic possible way to do this with text data: bag-of-words encoding.</p>
+<p>A bag-of-words encoding for a document is a vector of word counts. To create bag-of-words encodings, we have to start by finding each unique word in the dataset and giving it its own column.</p>
 </section>
 <section id="bag-of-words-example" class="level2">
 <h2 class="anchored" data-anchor-id="bag-of-words-example">Bag of words example</h2>
