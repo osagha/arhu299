@@ -1,7 +1,6 @@
 # Homework 2
 
-This homework has a by-hand component and a Python component. For the by-hand component, you can turn in a scan or a typed solution. For the Python component, turn in a `.ipynb` file.
-
+You can type this homework or handwrite and scan. Upload your solution to ELMS. Due on Tuesday Oct 15.
 
 ## Tf-idf by hand
 
