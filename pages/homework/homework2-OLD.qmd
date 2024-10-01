@@ -1,0 +1,140 @@
+# Homework 2
+
+This homework has a by-hand component and a Python component. For the by-hand component, you can turn in a scan or a typed solution. For the Python component, turn in a `.ipynb` file.
+
+
+## Tf-idf by hand
+
+Make up 5 short documents and construct the tf-idf matrix by hand for these 5 documents. Steps: 
+1. *First* make up your data.
+2. Make the bag-of-words (document-term) matrix by counting the words in each document.
+3. Then calculate the document frequency and inverse document frequency of each word.
+4. Then divide each column by its IDF.
+
+Use the version **without log-scaling**:
+
+$$TF[d,t] = count(d,t) \,\,\,\,\,\,\,\,\, IDF[t] = \frac{N}{DF[t]}$$
+Show your work at each step!
+
+Which words are the most discriminative words? (Meaning, which words appear in the fewest documents, and therefore provide the most information?)
+
+## Python warmup
+
+
+### Part 1
+
+Define the sigmoid function in Python. Use `np.exp` from the `numpy` library.
+
+```{python}
+# np is the standard abbreviation for numpy
+import numpy as np
+
+def sigmoid(z: float) -> float:
+    # your code here...
+    return # ...
+```
+
+Write a function that takes a *single string*, splits it up on the spaces, and returns a *set* containing all the unique words. (Hint: Use the `.split()` method. You can turn a list `x` into a set using `set(x)`.)
+
+```{python}
+def split_into_set(string: str) -> set[str]:
+    # your code here...
+    return # ...
+
+# Use this to test your function
+test_input = 'great movie'
+test_output = set(['great', 'movie'])
+if split_into_set(test_input) == test_output:
+    print('Test passed.')
+else:
+    print('Test failed.')
+```
+
+Write a function that takes a *list of strings* and returns a set containing all the unique words for *all* the strings together. (This is the vocabulary construction step.) (Hint: You can use the previous function to help you.)
+
+```{python}
+def get_word_set(list_of_strs: list[str]) -> set[str]:
+    # your code here...
+    return # ...
+
+# Use this to test your function
+test_input = ['great movie', 'terrible movie']
+test_output = set(['great', 'terrible', 'movie'])
+if get_word_set(test_input) == test_output:
+    print('Test passed.')
+else:
+    print('Test failed.')
+```
+
+Write a function that takes a *single string* and returns a *dictionary* whose keys are the unique words in the string, and whose values are the word counts. (Hint: use an `if`-`else` pattern inside a `for`-loop.)
+
+```{python}
+def get_wc(string: str) -> dict[str, int]:
+    # your code here...
+    return # ...
+
+# Use this to test your function
+test_input = 'great movie awesome movie'
+test_output = {'great': 1, 'awesome': 1, 'movie': 2}
+if get_wc(test_input) == test_output:
+    print('Test passed.')
+else:
+    print('Test failed.')
+```
+
+
+Write a function that takes a *list of strings* and returns a *dictionary* whose keys are the unique words, and whose values are the word counts.
+
+```{python}
+def get_wcs_from_list(list_of_strs: list[str]) -> dict[str, int]:
+    # your code here...
+    return # ...
+
+# Use this to test your function
+test_input = ['great movie', 'terrible movie']
+test_output = {'great': 1, 'terrible': 1, 'movie': 2}
+if get_wcs_from_list(test_input) == test_output:
+    print('Test passed.')
+else:
+    print('Test failed.')
+```
+
+### Part 2
+
+Write a function that takes a list of shapes and returns a list of randomly generated PyTorch tensors, where each tensor's shape comes from the input list. (Hint: Each shape is a tuple of ints, so the input is a list of tuples of ints. Use `torch.rand(...)`.)
+
+```{python}
+import torch
+
+def gen_tensors(shapes : list[tuple[int, int]]) -> list[torch.Tensor]:
+    # your code here...
+    return # ...
+
+# check your output
+test_input = [(1,1), (2,3), (5,4)]
+print(gen_tensors(test_input))
+```
+
+Write a function that takes a *list of strings* and returns the bag-of-words matrix as a PyTorch tensor. (Hint: The numbers in the tensor are word counts. This is a multi-step process. Use the functions you wrote in Part 1 to help you.)
+
+```{python}
+import torch
+
+def get_bow_matrix(list_of_strs: list[str]) -> torch.Tensor:
+    # your code here ...
+    return # ...
+
+# check your output here
+test_input = [
+    'great movie',
+    'what crap',
+    'what a great movie',
+]
+print(get_bow_matrix(test_input))
+
+```
+
+
+## Next time
+
+Next homework, we'll put the pieces together to do TFIDF in Python!

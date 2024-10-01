@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ARHU299 – homework2</title>
+<title>ARHU299 – quarto-inputd4d83f36</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,8 +62,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -118,10 +116,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#homework-2" id="toc-homework-2" class="nav-link active" data-scroll-target="#homework-2">Homework 2</a>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">09-24</a>
   <ul class="collapse">
-  <li><a href="#tf-idf-by-hand" id="toc-tf-idf-by-hand" class="nav-link" data-scroll-target="#tf-idf-by-hand">Tf-idf by hand</a></li>
-  <li><a href="#word-level-feature-representations" id="toc-word-level-feature-representations" class="nav-link" data-scroll-target="#word-level-feature-representations">Word-level feature representations</a></li>
+  <li><a href="#word-level-feature-representations-and-vector-semantics" id="toc-word-level-feature-representations-and-vector-semantics" class="nav-link" data-scroll-target="#word-level-feature-representations-and-vector-semantics">Word-level feature representations and vector semantics</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -131,20 +128,14 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="homework-2" class="level1">
-<h1>Homework 2</h1>
-<p>This homework has a by-hand component and a Python component. For the by-hand component, you can turn in a scan or a typed solution. For the Python component, turn in a <code>.ipynb</code> file.</p>
-<section id="tf-idf-by-hand" class="level2">
-<h2 class="anchored" data-anchor-id="tf-idf-by-hand">Tf-idf by hand</h2>
-<p>Make up 5 short documents and construct the tf-idf matrix by hand for these 5 documents. Steps: 1. <em>First</em> make up your data. 2. Make the bag-of-words (document-term) matrix by counting the words in each document. 3. Then calculate the document frequency and inverse document frequency of each word. 4. Then divide each column by its IDF.</p>
-<p>Use the version <strong>without log-scaling</strong>:</p>
-<p><span class="math display">\[TF[d,t] = count(d,t) \,\,\,\,\,\,\,\,\, IDF[t] = \frac{N}{DF[t]}\]</span> Show your work at each step!</p>
-<p>Which words are the most discriminative words? (Meaning, which words appear in the fewest documents, and therefore provide the most information?)</p>
-</section>
-<section id="word-level-feature-representations" class="level2">
-<h2 class="anchored" data-anchor-id="word-level-feature-representations">Word-level feature representations</h2>
-<p>Write down the transposition of the document-term matrix above to get the term-document matrix. In this matrix, each row is the feature representation for a word.</p>
-<p>Choose two pairs of words. Calculate the cosine similarity for each of the two pairs. <strong>Show every step in the arithmetic.</strong></p>
+<section id="section" class="level1">
+<h1>09-24</h1>
+<section id="word-level-feature-representations-and-vector-semantics" class="level2">
+<h2 class="anchored" data-anchor-id="word-level-feature-representations-and-vector-semantics">Word-level feature representations and vector semantics</h2>
+<p>This week we talked about feature representations for words, a.k.a. word embeddings.</p>
+<p>The lecture notes for this week will be a short section from the Jurafsky and Martin textbook. Please look at pages 1-13 of Chapter 6.</p>
+<p><a href="https://web.stanford.edu/~jurafsky/slp3/6.pdf">Link to Chapter 6 here.</a></p>
+<p><a href="https://web.stanford.edu/~jurafsky/slp3/">Link to the full book here.</a></p>
 
 
 </section>

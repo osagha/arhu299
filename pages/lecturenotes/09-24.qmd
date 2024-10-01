@@ -1,0 +1,11 @@
+# 09-24
+
+## Word-level feature representations and vector semantics
+
+This week we talked about feature representations for words, a.k.a. word embeddings.
+
+The lecture notes for this week will be a short section from the Jurafsky and Martin textbook. Please look at pages 1-13 of Chapter 6.
+
+[Link to Chapter 6 here.](https://web.stanford.edu/~jurafsky/slp3/6.pdf)
+
+[Link to the full book here.](https://web.stanford.edu/~jurafsky/slp3/)

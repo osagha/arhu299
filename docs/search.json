@@ -4,7 +4,7 @@
     "href": "pages/lecturenotes/index.html",
     "title": "Lecture Notes",
     "section": "",
-    "text": "Lecture Notes\n\nTuesday 09-03: Intro, Text as Strings, Classification, Sentiment Analysis, Features, Weights\n\n\nTuesday 09-05: Matrix Representations, Weights and Bias, Sigmoid, Model Predictions for Binary Classification\n\n\nTuesday 09-17: Bag of Words Representation"
+    "text": "Lecture Notes\n\nTuesday 09-03: Intro, Text as Strings, Classification, Sentiment Analysis, Features, Weights\n\n\nTuesday 09-05: Matrix Representations, Weights and Bias, Sigmoid, Model Predictions for Binary Classification\n\n\nTuesday 09-17: Bag of Words Representation\n\n\nThursday 09-19: TFIDF features for documents\n\n\nTuesday 09-24: Word-level feature representations and vector semantics"
   },
   {
     "objectID": "pages/lecturenotes/09-17.html",
@@ -91,32 +91,25 @@
     "text": "Summing up\nWe now know how to write down the formulas for one-layer sigmoid classifier and apply it to binary text classification. In the future, we’ll look multi-class classification (where there are more than two output labels).\nWe’ll also start to look at representation learning, the art of learning features from data (rather than hand-crafting them, like we’ve done here)."
   },
   {
-    "objectID": "pages/lecturenotes/day8.html",
-    "href": "pages/lecturenotes/day8.html",
-    "title": "Day 8",
+    "objectID": "pages/lecturenotes/09-24.html",
+    "href": "pages/lecturenotes/09-24.html",
+    "title": "09-24",
     "section": "",
-    "text": "Today we introduced multi-class classification.\n\n\n\nSo far, we have been mostly concerned with binary classification. In binary classification, we produce an \\(N \\times 1\\) score vector \\(z\\). \\[z = xw + b\\]Then the sigmoid function is used to get predictions. \\[\\hat y = \\sigma(z)\\] Remember that sigmoid is defined as: \\[\\sigma(z) = \\frac{1}{1 + \\exp(-z)}\\] We end up with a vector of numbers between 0 and 1. The first number is interpreted as the probability that the first document is in class 1, the second number is the probability that the second document is in class 1, and so on.\nThat setup assumes that we have two classes, 0 and 1. What if we have more than two classes? Well, then we will need more than one number for each input document.\n\n\n\nSpecifically, if we have 4 classes, then we need four numbers for each document. The relative sizes of the four numbers will tell us how likely each class is to apply to the document.\nFor example, here is a small subset of the AG News dataset. We have four classes: politics (1), sports (2), science/tech (3), and business (4).\nWe want to build a model that tells us how likely each class is for each document."
+    "text": "This week we talked about feature representations for words, a.k.a. word embeddings.\nThe lecture notes for this week will be a short section from the Jurafsky and Martin textbook. Please look at pages 1-13 of Chapter 6.\nLink to Chapter 6 here.\nLink to the full book here."
   },
   {
-    "objectID": "pages/lecturenotes/day8.html#content",
-    "href": "pages/lecturenotes/day8.html#content",
-    "title": "Day 8",
+    "objectID": "pages/lecturenotes/09-24.html#word-level-feature-representations-and-vector-semantics",
+    "href": "pages/lecturenotes/09-24.html#word-level-feature-representations-and-vector-semantics",
+    "title": "09-24",
     "section": "",
-    "text": "Today we introduced multi-class classification."
+    "text": "This week we talked about feature representations for words, a.k.a. word embeddings.\nThe lecture notes for this week will be a short section from the Jurafsky and Martin textbook. Please look at pages 1-13 of Chapter 6.\nLink to Chapter 6 here.\nLink to the full book here."
   },
   {
-    "objectID": "pages/lecturenotes/day8.html#binary-classification",
-    "href": "pages/lecturenotes/day8.html#binary-classification",
-    "title": "Day 8",
+    "objectID": "pages/homework/index.html",
+    "href": "pages/homework/index.html",
+    "title": "Homework",
     "section": "",
-    "text": "So far, we have been mostly concerned with binary classification. In binary classification, we produce an \\(N \\times 1\\) score vector \\(z\\). \\[z = xw + b\\]Then the sigmoid function is used to get predictions. \\[\\hat y = \\sigma(z)\\] Remember that sigmoid is defined as: \\[\\sigma(z) = \\frac{1}{1 + \\exp(-z)}\\] We end up with a vector of numbers between 0 and 1. The first number is interpreted as the probability that the first document is in class 1, the second number is the probability that the second document is in class 1, and so on.\nThat setup assumes that we have two classes, 0 and 1. What if we have more than two classes? Well, then we will need more than one number for each input document."
-  },
-  {
-    "objectID": "pages/lecturenotes/day8.html#multi-class-classification",
-    "href": "pages/lecturenotes/day8.html#multi-class-classification",
-    "title": "Day 8",
-    "section": "",
-    "text": "Specifically, if we have 4 classes, then we need four numbers for each document. The relative sizes of the four numbers will tell us how likely each class is to apply to the document.\nFor example, here is a small subset of the AG News dataset. We have four classes: politics (1), sports (2), science/tech (3), and business (4).\nWe want to build a model that tells us how likely each class is for each document."
+    "text": "Homework\n\nHomework 1: Matrix Multiplication and Text Classification\n\n\nHomework 2: TFIDF and word embeddings"
   },
   {
     "objectID": "pages/homework/homework1.html",
@@ -277,35 +270,77 @@
     "href": "pages/homework/homework2.html",
     "title": "Homework 2",
     "section": "",
-    "text": "This homework has a by-hand component and a Python component. For the by-hand component, you can turn in a scan or a typed solution. For the Python component, turn in a .ipynb file."
+    "text": "This homework has a by-hand component and a Python component. For the by-hand component, you can turn in a scan or a typed solution. For the Python component, turn in a .ipynb file.\n\n\nMake up 5 short documents and construct the tf-idf matrix by hand for these 5 documents. Steps: 1. First make up your data. 2. Make the bag-of-words (document-term) matrix by counting the words in each document. 3. Then calculate the document frequency and inverse document frequency of each word. 4. Then divide each column by its IDF.\nUse the version without log-scaling:\n\\[TF[d,t] = count(d,t) \\,\\,\\,\\,\\,\\,\\,\\,\\, IDF[t] = \\frac{N}{DF[t]}\\] Show your work at each step!\nWhich words are the most discriminative words? (Meaning, which words appear in the fewest documents, and therefore provide the most information?)\n\n\n\nWrite down the transposition of the document-term matrix above to get the term-document matrix. In this matrix, each row is the feature representation for a word.\nChoose two pairs of words. Calculate the cosine similarity for each of the two pairs. Show every step in the arithmetic."
   },
   {
     "objectID": "pages/homework/homework2.html#tf-idf-by-hand",
     "href": "pages/homework/homework2.html#tf-idf-by-hand",
     "title": "Homework 2",
+    "section": "",
+    "text": "Make up 5 short documents and construct the tf-idf matrix by hand for these 5 documents. Steps: 1. First make up your data. 2. Make the bag-of-words (document-term) matrix by counting the words in each document. 3. Then calculate the document frequency and inverse document frequency of each word. 4. Then divide each column by its IDF.\nUse the version without log-scaling:\n\\[TF[d,t] = count(d,t) \\,\\,\\,\\,\\,\\,\\,\\,\\, IDF[t] = \\frac{N}{DF[t]}\\] Show your work at each step!\nWhich words are the most discriminative words? (Meaning, which words appear in the fewest documents, and therefore provide the most information?)"
+  },
+  {
+    "objectID": "pages/homework/homework2.html#word-level-feature-representations",
+    "href": "pages/homework/homework2.html#word-level-feature-representations",
+    "title": "Homework 2",
+    "section": "",
+    "text": "Write down the transposition of the document-term matrix above to get the term-document matrix. In this matrix, each row is the feature representation for a word.\nChoose two pairs of words. Calculate the cosine similarity for each of the two pairs. Show every step in the arithmetic."
+  },
+  {
+    "objectID": "pages/homework/homework2-OLD.html",
+    "href": "pages/homework/homework2-OLD.html",
+    "title": "Homework 2",
+    "section": "",
+    "text": "This homework has a by-hand component and a Python component. For the by-hand component, you can turn in a scan or a typed solution. For the Python component, turn in a .ipynb file."
+  },
+  {
+    "objectID": "pages/homework/homework2-OLD.html#tf-idf-by-hand",
+    "href": "pages/homework/homework2-OLD.html#tf-idf-by-hand",
+    "title": "Homework 2",
     "section": "Tf-idf by hand",
     "text": "Tf-idf by hand\nMake up 5 short documents and construct the tf-idf matrix by hand for these 5 documents. Steps: 1. First make up your data. 2. Make the bag-of-words (document-term) matrix by counting the words in each document. 3. Then calculate the document frequency and inverse document frequency of each word. 4. Then divide each column by its IDF.\nUse the version without log-scaling:\n\\[TF[d,t] = count(d,t) \\,\\,\\,\\,\\,\\,\\,\\,\\, IDF[t] = \\frac{N}{DF[t]}\\] Show your work at each step!\nWhich words are the most discriminative words? (Meaning, which words appear in the fewest documents, and therefore provide the most information?)"
   },
   {
-    "objectID": "pages/homework/homework2.html#python-warmup",
-    "href": "pages/homework/homework2.html#python-warmup",
+    "objectID": "pages/homework/homework2-OLD.html#python-warmup",
+    "href": "pages/homework/homework2-OLD.html#python-warmup",
     "title": "Homework 2",
     "section": "Python warmup",
     "text": "Python warmup\n\nPart 1\nDefine the sigmoid function in Python. Use np.exp from the numpy library.\n\n# np is the standard abbreviation for numpy\nimport numpy as np\n\ndef sigmoid(z: float) -&gt; float:\n    # your code here...\n    return # ...\n\nWrite a function that takes a single string, splits it up on the spaces, and returns a set containing all the unique words. (Hint: Use the .split() method. You can turn a list x into a set using set(x).)\n\ndef split_into_set(string: str) -&gt; set[str]:\n    # your code here...\n    return # ...\n\n# Use this to test your function\ntest_input = 'great movie'\ntest_output = set(['great', 'movie'])\nif split_into_set(test_input) == test_output:\n    print('Test passed.')\nelse:\n    print('Test failed.')\n\nTest failed.\n\n\nWrite a function that takes a list of strings and returns a set containing all the unique words for all the strings together. (This is the vocabulary construction step.) (Hint: You can use the previous function to help you.)\n\ndef get_word_set(list_of_strs: list[str]) -&gt; set[str]:\n    # your code here...\n    return # ...\n\n# Use this to test your function\ntest_input = ['great movie', 'terrible movie']\ntest_output = set(['great', 'terrible', 'movie'])\nif get_word_set(test_input) == test_output:\n    print('Test passed.')\nelse:\n    print('Test failed.')\n\nTest failed.\n\n\nWrite a function that takes a single string and returns a dictionary whose keys are the unique words in the string, and whose values are the word counts. (Hint: use an if-else pattern inside a for-loop.)\n\ndef get_wc(string: str) -&gt; dict[str, int]:\n    # your code here...\n    return # ...\n\n# Use this to test your function\ntest_input = 'great movie awesome movie'\ntest_output = {'great': 1, 'awesome': 1, 'movie': 2}\nif get_wc(test_input) == test_output:\n    print('Test passed.')\nelse:\n    print('Test failed.')\n\nTest failed.\n\n\nWrite a function that takes a list of strings and returns a dictionary whose keys are the unique words, and whose values are the word counts.\n\ndef get_wcs_from_list(list_of_strs: list[str]) -&gt; dict[str, int]:\n    # your code here...\n    return # ...\n\n# Use this to test your function\ntest_input = ['great movie', 'terrible movie']\ntest_output = {'great': 1, 'terrible': 1, 'movie': 2}\nif get_wcs_from_list(test_input) == test_output:\n    print('Test passed.')\nelse:\n    print('Test failed.')\n\nTest failed.\n\n\n\n\nPart 2\nWrite a function that takes a list of shapes and returns a list of randomly generated PyTorch tensors, where each tensor’s shape comes from the input list. (Hint: Each shape is a tuple of ints, so the input is a list of tuples of ints. Use torch.rand(...).)\n\nimport torch\n\ndef gen_tensors(shapes : list[tuple[int, int]]) -&gt; list[torch.Tensor]:\n    # your code here...\n    return # ...\n\n# check your output\ntest_input = [(1,1), (2,3), (5,4)]\nprint(gen_tensors(test_input))\n\nNone\n\n\nWrite a function that takes a list of strings and returns the bag-of-words matrix as a PyTorch tensor. (Hint: The numbers in the tensor are word counts. This is a multi-step process. Use the functions you wrote in Part 1 to help you.)\n\nimport torch\n\ndef get_bow_matrix(list_of_strs: list[str]) -&gt; torch.Tensor:\n    # your code here ...\n    return # ...\n\n# check your output here\ntest_input = [\n    'great movie',\n    'what crap',\n    'what a great movie',\n]\nprint(get_bow_matrix(test_input))\n\nNone"
   },
   {
-    "objectID": "pages/homework/homework2.html#next-time",
-    "href": "pages/homework/homework2.html#next-time",
+    "objectID": "pages/homework/homework2-OLD.html#next-time",
+    "href": "pages/homework/homework2-OLD.html#next-time",
     "title": "Homework 2",
     "section": "Next time",
     "text": "Next time\nNext homework, we’ll put the pieces together to do TFIDF in Python!"
   },
   {
-    "objectID": "pages/homework/index.html",
-    "href": "pages/homework/index.html",
-    "title": "Homework",
+    "objectID": "pages/lecturenotes/day8.html",
+    "href": "pages/lecturenotes/day8.html",
+    "title": "Day 8",
     "section": "",
-    "text": "Homework\n\nHomework 1: Matrix Multiplication and Text Classification"
+    "text": "Today we introduced multi-class classification.\n\n\n\nSo far, we have been mostly concerned with binary classification. In binary classification, we produce an \\(N \\times 1\\) score vector \\(z\\). \\[z = xw + b\\]Then the sigmoid function is used to get predictions. \\[\\hat y = \\sigma(z)\\] Remember that sigmoid is defined as: \\[\\sigma(z) = \\frac{1}{1 + \\exp(-z)}\\] We end up with a vector of numbers between 0 and 1. The first number is interpreted as the probability that the first document is in class 1, the second number is the probability that the second document is in class 1, and so on.\nThat setup assumes that we have two classes, 0 and 1. What if we have more than two classes? Well, then we will need more than one number for each input document.\n\n\n\nSpecifically, if we have 4 classes, then we need four numbers for each document. The relative sizes of the four numbers will tell us how likely each class is to apply to the document.\nFor example, here is a small subset of the AG News dataset. We have four classes: politics (1), sports (2), science/tech (3), and business (4).\nWe want to build a model that tells us how likely each class is for each document."
+  },
+  {
+    "objectID": "pages/lecturenotes/day8.html#content",
+    "href": "pages/lecturenotes/day8.html#content",
+    "title": "Day 8",
+    "section": "",
+    "text": "Today we introduced multi-class classification."
+  },
+  {
+    "objectID": "pages/lecturenotes/day8.html#binary-classification",
+    "href": "pages/lecturenotes/day8.html#binary-classification",
+    "title": "Day 8",
+    "section": "",
+    "text": "So far, we have been mostly concerned with binary classification. In binary classification, we produce an \\(N \\times 1\\) score vector \\(z\\). \\[z = xw + b\\]Then the sigmoid function is used to get predictions. \\[\\hat y = \\sigma(z)\\] Remember that sigmoid is defined as: \\[\\sigma(z) = \\frac{1}{1 + \\exp(-z)}\\] We end up with a vector of numbers between 0 and 1. The first number is interpreted as the probability that the first document is in class 1, the second number is the probability that the second document is in class 1, and so on.\nThat setup assumes that we have two classes, 0 and 1. What if we have more than two classes? Well, then we will need more than one number for each input document."
+  },
+  {
+    "objectID": "pages/lecturenotes/day8.html#multi-class-classification",
+    "href": "pages/lecturenotes/day8.html#multi-class-classification",
+    "title": "Day 8",
+    "section": "",
+    "text": "Specifically, if we have 4 classes, then we need four numbers for each document. The relative sizes of the four numbers will tell us how likely each class is to apply to the document.\nFor example, here is a small subset of the AG News dataset. We have four classes: politics (1), sports (2), science/tech (3), and business (4).\nWe want to build a model that tells us how likely each class is for each document."
   },
   {
     "objectID": "pages/lecturenotes/09-19.html",
