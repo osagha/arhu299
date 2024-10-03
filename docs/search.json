@@ -18,7 +18,7 @@
     "href": "pages/lecturenotes/index.html",
     "title": "Lecture Notes",
     "section": "",
-    "text": "Lecture Notes\n\nTuesday 09-03: Intro, Text as Strings, Classification, Sentiment Analysis, Features, Weights\n\n\nTuesday 09-05: Matrix Representations, Weights and Bias, Sigmoid, Model Predictions for Binary Classification\n\n\nTuesday 09-17: Bag of Words Representation\n\n\nThursday 09-19: TFIDF features for documents\n\n\nTuesday 09-24: Word-level feature representations and vector semantics\n\n\nTuesday 10-01: Multi-class classification\n\n\nTuesday 10-03: Cross-entropy loss and gradient descent"
+    "text": "Lecture Notes\n\nTuesday 09-03: Intro, Text as Strings, Classification, Sentiment Analysis, Features, Weights\n\n\nTuesday 09-05: Matrix Representations, Weights and Bias, Sigmoid, Model Predictions for Binary Classification\n\n\nTuesday 09-17: Bag of Words Representation\n\n\nThursday 09-19: TFIDF features for documents\n\n\nTuesday 09-24: Word-level feature representations and vector semantics\n\n\nTuesday 10-01: Multi-class classification\n\n\nThursday 10-03: Cross-entropy loss and gradient descent"
   },
   {
     "objectID": "pages/lecturenotes/09-17.html",

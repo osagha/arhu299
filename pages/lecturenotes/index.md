@@ -8,4 +8,4 @@
 
 ### [Tuesday 10-01](10-01.qmd): Multi-class classification
 
-### [Tuesday 10-03](10-03.qmd): Cross-entropy loss and gradient descent
+### [Thursday 10-03](10-03.qmd): Cross-entropy loss and gradient descent
