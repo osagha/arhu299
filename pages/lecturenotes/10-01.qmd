@@ -1,0 +1,9 @@
+# 10-01
+
+## Multi-class classification
+
+Today we talked about multi-class classification. Please read section 5.3 of Chapter 5 in the Jurafsky and Martin textbook. Section 5.3 is on pages 8-11.
+
+[Link to Chapter 5 here.](https://web.stanford.edu/~jurafsky/slp3/5.pdf)
+
+[Link to the full book here.](https://web.stanford.edu/~jurafsky/slp3/)

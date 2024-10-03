@@ -5,3 +5,7 @@
 ### [Tuesday 09-17](09-17.qmd): Bag of Words Representation
 ### [Thursday 09-19](09-19.qmd): TFIDF features for documents
 ### [Tuesday 09-24](09-24.qmd): Word-level feature representations and vector semantics
+
+### [Tuesday 10-01](10-01.qmd): Multi-class classification
+
+### [Tuesday 10-03](10-03.qmd): Cross-entropy loss and gradient descent
