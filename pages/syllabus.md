@@ -1,13 +1,13 @@
 # ARHU299 Syllabus
 Syllabus for ARHU299: Machine Learning in Language and Art at the University of Maryland, College Park.
 
-Last updated August 27, 2024.
+Last updated Oct 3, 2024.
 
 Instructor: Omar Agha (oagha@umd.edu)
+Office Hours: Tuesday 11am-12pm in MMH1417D
 
 TA: Sathvik Nair (sathvik@umd.edu)
-
-Office hours: TBD
+Office hours: Thursday 11am-12pm in MMH1407D
 
 ## Course Summary
 In this course, you will learn how machine learning models read and write text, classify images, and more. This requires understanding some basic elements of linear algebra (vectors and matrices), calculus (the chain rule for derivatives), Python programming, and basic statistics. If you have not seen any of this before, you will learn the relevant tools along the way, in the context of solving applied problems, and with the aid of software that performs complex calculations for you.

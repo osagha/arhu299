@@ -136,7 +136,8 @@ ul.task-list li input[type="checkbox"] {
 <p>You can type this homework or handwrite and scan. Upload your solution to ELMS. Due on Tuesday Oct 15.</p>
 <section id="tf-idf-by-hand" class="level2">
 <h2 class="anchored" data-anchor-id="tf-idf-by-hand">Tf-idf by hand</h2>
-<p>Make up 5 short documents and construct the tf-idf matrix by hand for these 5 documents. Steps: 1. <em>First</em> make up your data. 2. Make the bag-of-words (document-term) matrix by counting the words in each document. 3. Then calculate the document frequency and inverse document frequency of each word. 4. Then divide each column by its IDF.</p>
+<p>Make up 5 short documents and construct the tf-idf matrix by hand for these 5 documents. Each document should be short: 1-2 sentences, and around 10 words or less.</p>
+<p>Steps: 1. <em>First</em> make up your data, described above. 2. Make the bag-of-words (document-term) matrix by counting the words in each document. 3. Then calculate inverse document frequency of each word. 4. Then multiply each column by the IDF for that word.</p>
 <p>Use the version <strong>without log-scaling</strong>:</p>
 <p><span class="math display">\[TF[d,t] = count(d,t) \,\,\,\,\,\,\,\,\, IDF[t] = \frac{N}{DF[t]}\]</span> Show your work at each step!</p>
 <p>Which words are the most discriminative words? (Meaning, which words appear in the fewest documents, and therefore provide the most information?)</p>

@@ -4,11 +4,13 @@ You can type this homework or handwrite and scan. Upload your solution to ELMS. 
 
 ## Tf-idf by hand
 
-Make up 5 short documents and construct the tf-idf matrix by hand for these 5 documents. Steps: 
-1. *First* make up your data.
+Make up 5 short documents and construct the tf-idf matrix by hand for these 5 documents. Each document should be short: 1-2 sentences, and around 10 words or less. 
+
+Steps: 
+1. *First* make up your data, described above.
 2. Make the bag-of-words (document-term) matrix by counting the words in each document.
-3. Then calculate the document frequency and inverse document frequency of each word.
-4. Then divide each column by its IDF.
+3. Then calculate inverse document frequency of each word.
+4. Then multiply each column by the IDF for that word.
 
 Use the version **without log-scaling**:
 
