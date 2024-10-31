@@ -12,6 +12,8 @@ If you are serious about learning this stuff, you need to build muscle memory fo
 
 In this homework, you will train a binary classifier using 4 slightly different feature representations. You will compare their performance by looking at the training loss.
 
+**Make sure you reference the lecture notes, especially Notebook 03. They will help you a lot.**
+
 ### Part 1
 
 Download the `.csv` file for the IMDB sentiment analysis data. Load it into Python using Pandas, and extract the text and labels.
@@ -27,6 +29,8 @@ Train the classifier for 100 epochs on your feature matrix. PyTorch will tell yo
 ### Part 3
 
 Now, take your original feature matrix and normalize the rows: For each row, calculate the mean and standard deviation of the row. Subtract the mean of the row from every number in the row, and divide every number in the row by the standard deviation.
+
+Use Pytorch to do this. You can look at the Pytorch documentation to figure out how to do it.
 
 Use the new normalized feature matrix, train the classifier again. Write down the losses. Compare the new losses to the losses from the first run. Did it improve?
 
