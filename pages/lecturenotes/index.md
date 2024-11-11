@@ -14,3 +14,6 @@
 ### [Thursday 10-17](https://colab.research.google.com/drive/1UxZzV2AQEO7WPJCpCejVSTwfHfecpILm?usp=sharing): Notebook 01: Python data structures
 ### [Thursday 10-24](https://colab.research.google.com/drive/10vKFAOS5gdbj1EbgmnPRTPNo1Lm3ycIp?usp=sharing): Notebook 02: PyTorch and a toy model
 ### [Tuesday 10-29](https://colab.research.google.com/drive/12kbg0ly1QhTaDLiojdP_v6OK1O5aSXWN?usp=sharing): Notebook 03: Text data with Pandas and Sklearn
+### [Tuesday 11-05](https://colab.research.google.com/drive/1EakCmkZNo-4DFe73198vgpkWNyNrqpVj?usp=sharing): Notebook 04: Training and testing
+### [Thursday 11-07](https://colab.research.google.com/drive/1njkg1EulZZG3ohqmAZOYIrFIyN6SciAb?usp=sharing): Notebook 05: Multilayer perceptron models for classification
+### Tuesday 11-12: Intro to n-gram language models (see [Chapter 3](https://web.stanford.edu/~jurafsky/slp3/3.pdf) of *Speech and Language Procesing*)
